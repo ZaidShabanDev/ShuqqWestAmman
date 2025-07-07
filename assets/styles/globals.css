@@ -3,15 +3,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
 
-/* Root variables for consistent theming */
-:root {
-  --primary-color: #202124;
-  --secondary-color: #0284c7;
-  --accent-color: #14b8a6;
-  --background-color: #ffffff;
-  --text-color: #18181b;
-  --text-light: #52525b;
-  --border-color: #e4e4e7;
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Custom Color Palette */
+  --color-primary-50: #f8f9fa;
+  --color-primary-100: #f1f3f4;
+  --color-primary-200: #e8eaed;
+  --color-primary-300: #dadce0;
+  --color-primary-400: #bdc1c6;
+  --color-primary-500: #9aa0a6;
+  --color-primary-600: #80868b;
+  --color-primary-700: #5f6368;
+  --color-primary-800: #3c4043;
+  --color-primary-900: #202124;
+  --color-primary-950: #0d0d0d;
+
+  --color-secondary-50: #f0f9ff;
+  --color-secondary-100: #e0f2fe;
+  --color-secondary-200: #bae6fd;
+  --color-secondary-300: #7dd3fc;
+  --color-secondary-400: #38bdf8;
+  --color-secondary-500: #0ea5e9;
+  --color-secondary-600: #0284c7;
+  --color-secondary-700: #0369a1;
+  --color-secondary-800: #075985;
+  --color-secondary-900: #0c4a6e;
+  --color-secondary-950: #082f49;
+
+  --color-accent-50: #f0fdfa;
+  --color-accent-100: #ccfbf1;
+  --color-accent-200: #99f6e4;
+  --color-accent-300: #5eead4;
+  --color-accent-400: #2dd4bf;
+  --color-accent-500: #14b8a6;
+  --color-accent-600: #0d9488;
+  --color-accent-700: #0f766e;
+  --color-accent-800: #115e59;
+  --color-accent-900: #134e4a;
+  --color-accent-950: #042f2e;
+
+  /* Font Families */
+  --font-family-primary: 'Inter', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-family-secondary: 'Poppins', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-family-arabic: 'Noto Sans Arabic', 'Tajawal', system-ui, sans-serif;
+
+  /* Custom Font Sizes with better line heights for Arabic */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+  --spacing-144: 36rem;
 }
 
 /* RTL Support */
@@ -31,61 +83,85 @@ html[dir="ltr"] {
 }
 
 body {
-  font-family: 'Inter', 'Noto Sans Arabic', system-ui, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-family: var(--font-family-primary);
+  background-color: white;
+  color: var(--color-primary-900);
   line-height: 1.7;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Utility Classes */
+/* Custom Utility Classes */
 @layer utilities {
 
   /* Layout utilities */
   .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
     max-width: 1400px;
   }
 
   .wrapper {
-    @apply container w-full;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 1400px;
   }
 
   .wrapper-sm {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 w-full;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
     max-width: 1200px;
   }
 
   .wrapper-lg {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-20 w-full;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
     max-width: 1600px;
   }
 
   /* Flexbox utilities */
   .flex-start {
-    @apply flex justify-start items-center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .flex-center {
-    @apply flex justify-center items-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .flex-between {
-    @apply flex justify-between items-center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .flex-end {
-    @apply flex justify-end items-center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   .flex-col-center {
-    @apply flex flex-col justify-center items-center;
-  }
-
-  .flex-col-start {
-    @apply flex flex-col justify-start items-center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   /* RTL-aware spacing */
@@ -132,188 +208,298 @@ body {
 
   /* Typography utilities */
   .text-primary {
-    color: var(--primary-color);
+    color: var(--color-primary-900);
   }
 
   .text-secondary {
-    color: var(--secondary-color);
+    color: var(--color-secondary-600);
   }
 
   .text-accent {
-    color: var(--accent-color);
+    color: var(--color-accent-500);
   }
 
   .text-light {
-    color: var(--text-light);
+    color: var(--color-primary-600);
+  }
+
+  /* Font families */
+  .font-primary {
+    font-family: var(--font-family-primary);
+  }
+
+  .font-secondary {
+    font-family: var(--font-family-secondary);
+  }
+
+  .font-arabic {
+    font-family: var(--font-family-arabic);
+    line-height: 1.8;
   }
 
   /* Heading styles */
   .h1-bold {
-    @apply font-secondary font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 1.2;
   }
 
   .h2-bold {
-    @apply font-secondary font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.3;
   }
 
   .h3-bold {
-    @apply font-secondary font-bold text-xl sm:text-2xl lg:text-3xl xl:text-4xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
 
   .h4-bold {
-    @apply font-secondary font-bold text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.4;
   }
 
   .h5-bold {
-    @apply font-secondary font-bold text-base sm:text-lg lg:text-xl xl:text-2xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .h6-bold {
-    @apply font-secondary font-bold text-sm sm:text-base lg:text-lg xl:text-xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 
   /* Heading medium weight */
   .h1-medium {
-    @apply font-secondary font-semibold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    font-size: 1.875rem;
+    line-height: 1.2;
   }
 
   .h2-medium {
-    @apply font-secondary font-semibold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.3;
   }
 
   .h3-medium {
-    @apply font-secondary font-semibold text-xl sm:text-2xl lg:text-3xl xl:text-4xl leading-tight;
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
 
   /* Body text styles */
   .body-large {
-    @apply font-primary text-lg sm:text-xl leading-relaxed;
+    font-family: var(--font-family-primary);
+    font-size: 1.125rem;
+    line-height: 1.7;
   }
 
   .body-medium {
-    @apply font-primary text-base sm:text-lg leading-relaxed;
+    font-family: var(--font-family-primary);
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
   .body-small {
-    @apply font-primary text-sm sm:text-base leading-relaxed;
+    font-family: var(--font-family-primary);
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 
   .body-xs {
-    @apply font-primary text-xs sm:text-sm leading-relaxed;
-  }
-
-  /* Arabic text styles */
-  .text-arabic {
-    @apply font-arabic;
-    line-height: 1.8;
-    /* Better line height for Arabic */
+    font-family: var(--font-family-primary);
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
 
   /* Button styles */
   .btn {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2 text-center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    border: none;
+    font-family: var(--font-family-primary);
   }
 
   .btn-primary {
-    @apply btn bg-primary-900 text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300;
+    background-color: var(--color-primary-900);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-800);
   }
 
   .btn-secondary {
-    @apply btn bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-4 focus:ring-secondary-300;
+    background-color: var(--color-secondary-600);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-secondary-700);
   }
 
   .btn-accent {
-    @apply btn bg-accent-500 text-white hover:bg-accent-600 focus:ring-4 focus:ring-accent-300;
+    background-color: var(--color-accent-500);
+    color: white;
+  }
+
+  .btn-accent:hover {
+    background-color: var(--color-accent-600);
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-900 text-primary-900 hover:bg-primary-900 hover:text-white focus:ring-4 focus:ring-primary-300;
+    border: 2px solid var(--color-primary-900);
+    color: var(--color-primary-900);
+    background-color: transparent;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-primary-900);
+    color: white;
   }
 
   .btn-ghost {
-    @apply btn text-primary-900 hover:bg-primary-50 focus:ring-4 focus:ring-primary-300;
+    color: var(--color-primary-900);
+    background-color: transparent;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-primary-50);
   }
 
   /* Card styles */
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 transition-all duration-200;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-primary-200);
+    padding: 1.5rem;
+    transition: all 0.2s;
   }
 
   .card-hover {
-    @apply card hover:shadow-lg hover:border-gray-300;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-primary-200);
+    padding: 1.5rem;
+    transition: all 0.2s;
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary-300);
   }
 
   /* Input styles */
   .input {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500 transition-colors duration-200;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-primary-300);
+    border-radius: 0.5rem;
+    transition: border-color 0.2s;
+    font-family: var(--font-family-primary);
   }
 
-  .input-error {
-    @apply input border-red-500 focus:ring-red-500 focus:border-red-500;
+  .input:focus {
+    outline: none;
+    border-color: var(--color-secondary-500);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  }
+
+  /* Gradient utilities */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-400) 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-300) 100%);
   }
 
   /* Section spacing */
   .section-padding {
-    @apply py-12 lg:py-16 xl:py-20;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .section-padding-sm {
-    @apply py-8 lg:py-12 xl:py-16;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .section-padding-lg {
-    @apply py-16 lg:py-20 xl:py-24;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
-  /* Responsive text utilities */
-  .text-responsive {
-    @apply text-sm sm:text-base lg:text-lg;
+  /* Responsive breakpoints for headers */
+  @media (min-width: 640px) {
+    .h1-bold {
+      font-size: 2.25rem;
+    }
+
+    .h2-bold {
+      font-size: 1.875rem;
+    }
+
+    .h3-bold {
+      font-size: 1.5rem;
+    }
   }
 
-  .text-responsive-sm {
-    @apply text-xs sm:text-sm lg:text-base;
+  @media (min-width: 1024px) {
+    .h1-bold {
+      font-size: 3rem;
+    }
+
+    .h2-bold {
+      font-size: 2.25rem;
+    }
+
+    .h3-bold {
+      font-size: 1.875rem;
+    }
   }
 
-  .text-responsive-lg {
-    @apply text-base sm:text-lg lg:text-xl;
-  }
+  @media (min-width: 1280px) {
+    .h1-bold {
+      font-size: 3.75rem;
+    }
 
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
+    .h2-bold {
+      font-size: 3rem;
+    }
 
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-
-  .animate-slide-down {
-    animation: slideDown 0.5s ease-out;
-  }
-}
-
-/* Custom animations */
-@keyframes slideUp {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+    .h3-bold {
+      font-size: 2.25rem;
+    }
   }
 }
 
@@ -328,21 +514,21 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f4f5;
+  background: var(--color-primary-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #a1a1aa;
+  background: var(--color-primary-400);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+  background: var(--color-primary-500);
 }
 
 /* Focus styles for accessibility */
 *:focus {
-  outline: 2px solid #0284c7;
+  outline: 2px solid var(--color-secondary-500);
   outline-offset: 2px;
 }
 
