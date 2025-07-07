@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/assets/styles/globals.css";
-import { Inter } from "next/font/google";
 import {
   APP_NAME,
   APP_DESCRIPTION,
@@ -12,8 +11,6 @@ import {
 } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -40,7 +37,7 @@ export default async function RootLayout({
   }
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.className}`}>
+      <body>
         <NextIntlClientProvider>
           {children}
         </NextIntlClientProvider>
