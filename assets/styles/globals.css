@@ -96,73 +96,7 @@ body {
 @layer utilities {
 
   /* Layout utilities */
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-    max-width: 1400px;
-  }
 
-  .wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-    max-width: 1400px;
-  }
-
-  .wrapper-sm {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-    max-width: 1200px;
-  }
-
-  .wrapper-lg {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    width: 100%;
-    max-width: 1600px;
-  }
-
-  /* Flexbox utilities */
-  .flex-start {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .flex-end {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .flex-col-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
   /* RTL-aware spacing */
   .space-x-rtl>*+* {
