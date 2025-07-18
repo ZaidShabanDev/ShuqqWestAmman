@@ -1,4 +1,5 @@
 import { routing } from '@/i18n/routing'
+import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { Poppins } from 'next/font/google'

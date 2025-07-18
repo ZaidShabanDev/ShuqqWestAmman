@@ -1,5 +1,8 @@
 {
   "hello_world": "مرحبا بالعالم",
   "greeting": "مرحبا",
-  "welcome": "أهلا وسهلا"
+  "welcome": "أهلا وسهلا",
+  "NotFound": {
+    "page_not_found": "الصفحة التي تبحث عنها غير موجودة"
+  }
 }
