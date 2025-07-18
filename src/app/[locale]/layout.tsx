@@ -1,5 +1,8 @@
+import { routing } from '@/i18n/routing'
 import type { Metadata } from 'next'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { Poppins } from 'next/font/google'
+import { notFound } from 'next/navigation'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -16,10 +19,20 @@ export const metadata: Metadata = {
   keywords: ['Real Estate Amman', 'Properties Jordan', 'Apartments Amman', 'Villas West Amman'],
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang={locale} className={poppins.className}>
+      <body>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   )
 }
