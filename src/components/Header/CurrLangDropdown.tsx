@@ -1,9 +1,7 @@
 'use client';
 
 import { getLanguages } from '@/data/navigation';
-import { Link } from '@/shared/link';
 import {
-  CloseButton,
   Popover,
   PopoverButton,
   PopoverPanel,
@@ -17,26 +15,47 @@ import {
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
-const Languages = ({ languages }: { languages: Awaited<ReturnType<typeof getLanguages>> }) => {
+const Languages = ({
+  languages,
+  onClose,
+}: {
+  languages: Awaited<ReturnType<typeof getLanguages>>;
+  onClose?: () => void;
+}) => {
+  const [selectedLanguage, setSelectedLanguage] = useState(languages.find((lang) => lang.active)?.id || 'English');
+
+  const handleLanguageClick = (language: (typeof languages)[0]) => {
+    // Update the selected language state
+    setSelectedLanguage(language.id);
+
+    // Set the direction on the document element
+    document.documentElement.dir = language.dir;
+
+    // Also set it on the html element's lang attribute for accessibility
+    document.documentElement.lang = language.id.toLowerCase();
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       {languages.map((item, index) => (
-        <CloseButton
-          as={Link}
-          href={item.href}
+        <button
           key={index}
+          onClick={() => handleLanguageClick(item)}
           className={clsx(
-            '-m-2.5 flex items-center rounded-lg p-2.5 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
-            item.active ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
+            '-m-2.5 flex w-full cursor-pointer items-center rounded-lg p-2.5 text-left transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
+            selectedLanguage === item.id ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
         >
           <div>
             <p className="text-sm font-medium">{item.name}</p>
             <p className="text-xs text-neutral-500 dark:text-neutral-400">{item.description}</p>
           </div>
-        </CloseButton>
+        </button>
       ))}
     </div>
   );

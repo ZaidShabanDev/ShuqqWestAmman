@@ -41,12 +41,15 @@ export const getLanguages = async () => {
       description: 'English',
       href: '#',
       active: true,
+      dir: 'ltr' as const,
     },
     {
       id: 'Arabic',
       name: 'العربية',
       description: 'Arabic',
       href: '#',
+      active: false,
+      dir: 'rtl' as const,
     },
   ];
 };
