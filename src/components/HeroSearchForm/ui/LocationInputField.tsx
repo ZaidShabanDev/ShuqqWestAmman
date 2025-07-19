@@ -1,10 +1,9 @@
-'use client'
+'use client';
 
-import { useInteractOutside } from '@/hooks/useInteractOutside'
-import { Divider } from '@/shared/divider'
-import T from '@/utils/getT'
-import * as Headless from '@headlessui/react'
-import { MapPinIcon } from '@heroicons/react/24/outline'
+import { useInteractOutside } from '@/hooks/useInteractOutside';
+import { Divider } from '@/shared/divider';
+import * as Headless from '@headlessui/react';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 import {
   BeachIcon,
   EiffelTowerIcon,
@@ -12,18 +11,19 @@ import {
   LakeIcon,
   Location01Icon,
   TwinTowerIcon,
-} from '@hugeicons/core-free-icons'
-import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react'
-import clsx from 'clsx'
-import _ from 'lodash'
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { ClearDataButton } from './ClearDataButton'
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react';
+import clsx from 'clsx';
+import _ from 'lodash';
+import { useTranslations } from 'next-intl';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { ClearDataButton } from './ClearDataButton';
 
 type Suggest = {
-  id: string
-  name: string
-  icon?: IconSvgElement
-}
+  id: string;
+  name: string;
+  icon?: IconSvgElement;
+};
 
 const demoInitSuggests: Suggest[] = [
   {
@@ -51,7 +51,7 @@ const demoInitSuggests: Suggest[] = [
     name: 'Humboldt Park, Chicago, IL',
     icon: LakeIcon,
   },
-]
+];
 
 const demoSearchingSuggests: Suggest[] = [
   {
@@ -74,7 +74,7 @@ const demoSearchingSuggests: Suggest[] = [
     id: '5',
     name: 'Los Angeles, CA, United States',
   },
-]
+];
 
 const styles = {
   button: {
@@ -93,72 +93,70 @@ const styles = {
     default: 'w-lg sm:py-6',
     small: 'w-md sm:py-5',
   },
-}
+};
 
 interface Props {
-  placeholder?: string
-  description?: string
-  className?: string
-  inputName?: string
-  initSuggests?: Suggest[]
-  searchingSuggests?: Suggest[]
-  fieldStyle: 'default' | 'small'
+  className?: string;
+  inputName?: string;
+  initSuggests?: Suggest[];
+  searchingSuggests?: Suggest[];
+  fieldStyle: 'default' | 'small';
 }
 
 export const LocationInputField: FC<Props> = ({
-  placeholder = T['HeroSearchForm']['Location'],
-  description = T['HeroSearchForm']['Where are you going?'],
   className = 'flex-1',
   inputName = 'location',
   initSuggests = demoInitSuggests,
   searchingSuggests = demoSearchingSuggests,
   fieldStyle = 'default',
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [showPopover, setShowPopover] = useState(false)
-  const [selected, setSelected] = useState<Suggest | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [showPopover, setShowPopover] = useState(false);
+  const [selected, setSelected] = useState<Suggest | null>(null);
+
+  const t = useTranslations('HeroSearchForm');
 
   useEffect(() => {
     const _inputFocusTimeOut = setTimeout(() => {
       if (showPopover && inputRef.current) {
-        inputRef.current.focus()
+        inputRef.current.focus();
       }
-    }, 200)
+    }, 200);
     return () => {
-      clearTimeout(_inputFocusTimeOut)
-    }
-  }, [showPopover])
+      clearTimeout(_inputFocusTimeOut);
+    };
+  }, [showPopover]);
 
   // for memoization of the close function
   const closePopover = useCallback(() => {
-    setShowPopover(false)
-  }, [])
+    setShowPopover(false);
+  }, []);
 
   //  a custom hook that listens for clicks outside the container
-  useInteractOutside(containerRef, closePopover)
+  useInteractOutside(containerRef, closePopover);
 
   const handleInputChange = useCallback(
     _.debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-      setShowPopover(true)
+      setShowPopover(true);
       // If the input is empty, Combobox will automatically setSelected
       if (e.target.value) {
         setSelected({
           id: Date.now().toString(), // Generate a unique id for the selected item
           name: e.target.value,
-        })
+        });
       }
     }, 300),
     []
-  )
+  );
   useEffect(() => {
     return () => {
-      handleInputChange.cancel() // Hủy debounce khi component unmount
-    }
-  }, [handleInputChange])
+      handleInputChange.cancel(); // Hủy debounce khi component unmount
+    };
+  }, [handleInputChange]);
 
-  const isShowInitSuggests = !selected?.id
-  const suggestsToShow = isShowInitSuggests ? initSuggests : searchingSuggests
+  const isShowInitSuggests = !selected?.id;
+  const suggestsToShow = isShowInitSuggests ? initSuggests : searchingSuggests;
   return (
     <div
       className={`group relative z-10 flex ${className}`}
@@ -170,13 +168,13 @@ export const LocationInputField: FC<Props> = ({
       <Headless.Combobox
         value={selected}
         onChange={(value) => {
-          setSelected(value || { id: '', name: '' })
+          setSelected(value || { id: '', name: '' });
           // Close the popover when a value is selected
           if (value?.id) {
-            setShowPopover(false)
+            setShowPopover(false);
             setTimeout(() => {
-              inputRef.current?.blur()
-            }, 50)
+              inputRef.current?.blur();
+            }, 50);
           }
         }}
       >
@@ -195,21 +193,21 @@ export const LocationInputField: FC<Props> = ({
               aria-label="Search for a location"
               className={clsx(styles.input.base, styles.input[fieldStyle])}
               name={inputName}
-              placeholder={placeholder}
+              placeholder={t('Location')}
               autoComplete="off"
               displayValue={(item?: Suggest) => item?.name || ''}
               onChange={handleInputChange}
             />
             <div className="mt-0.5 text-start text-sm font-light text-neutral-400">
-              <span className="line-clamp-1">{description}</span>
+              <span className="line-clamp-1">{t('Location, city, or property name')}</span>
             </div>
 
             <ClearDataButton
               className={clsx(!selected?.id && 'sr-only')}
               onClick={() => {
-                setSelected({ id: '', name: '' })
-                setShowPopover(false)
-                inputRef.current?.focus()
+                setSelected({ id: '', name: '' });
+                setShowPopover(false);
+                inputRef.current?.focus();
               }}
             />
           </div>
@@ -219,7 +217,7 @@ export const LocationInputField: FC<Props> = ({
           <div className={clsx(styles.panel.base, styles.panel[fieldStyle])}>
             {isShowInitSuggests && (
               <p className="mt-2 mb-3 px-4 text-xs/6 font-normal text-neutral-600 sm:mt-0 sm:px-8 dark:text-neutral-400">
-                {T['HeroSearchForm']['Suggested locations']}
+                {t('Suggested locations')}
               </p>
             )}
             {isShowInitSuggests && <Divider className="opacity-50" />}
@@ -242,5 +240,5 @@ export const LocationInputField: FC<Props> = ({
         </Headless.Transition>
       </Headless.Combobox>
     </div>
-  )
-}
+  );
+};

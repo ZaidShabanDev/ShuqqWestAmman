@@ -20,18 +20,18 @@ interface Props {
   className?: string;
   formStyle: 'default' | 'small';
 }
-const t = useTranslations('HeroSearchForm');
-
-const tabs = [
-  { value: 'buy', label: t('Buy') },
-  { value: 'rent', label: t('Rent') },
-  { value: 'sell', label: t('Sell') },
-] as const;
 
 export const RealEstateHeroSearchForm: FC<Props> = ({ className, formStyle = 'default' }) => {
+  const t = useTranslations('HeroSearchForm');
+
+  const tabs = [
+    { value: 'buy', label: t('Buy') },
+    { value: 'rent', label: t('Rent') },
+    { value: 'sell', label: t('Sell') },
+  ] as const;
+
   const [tabType, setTabType] = useState<Tab>(tabs[0].value);
   const router = useRouter();
-
   // Prefetch the stay categories page to improve performance
   useEffect(() => {
     router.prefetch('/real-estate-categories/all');
@@ -88,11 +88,7 @@ export const RealEstateHeroSearchForm: FC<Props> = ({ className, formStyle = 'de
 
       {/*  */}
       <div className="relative flex">
-        <LocationInputField
-          className="hero-search-form__field-after flex-1"
-          description="Location, city, or property name"
-          fieldStyle={formStyle}
-        />
+        <LocationInputField className="hero-search-form__field-after flex-1" fieldStyle={formStyle} />
         <VerticalDividerLine />
         <PropertyTypeSelectField
           fieldStyle={formStyle}

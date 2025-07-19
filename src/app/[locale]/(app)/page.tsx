@@ -5,8 +5,8 @@ import SectionOurFeatures from '@/components/SectionOurFeatures';
 import SectionVideos from '@/components/SectionVideos';
 import { getRealEstateCategories } from '@/data/categories';
 import { getRealEstateListings } from '@/data/listings';
-import heroImage from '@/images/hero-right-3.png';
-import ourFeatureImage from '@/images/our-features-2.png';
+import heroImage from '@/images/hero-right.jpg';
+import ourFeatureImage from '@/images/our-features.jpeg';
 import { Metadata } from 'next';
 import Image from 'next/image';
 

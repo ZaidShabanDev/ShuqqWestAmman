@@ -49,6 +49,12 @@
     "Type": "Type",
     "Property": "Property",
     "Add property": "Add property",
-    "Price": "Price"
+    "Price": "Price",
+    "Choose price range": "Choose price range",
+    "Price range": "Price range",
+    "Suggested locations": "Suggested locations",
+    "Location, city, or property name": "Location, city, or property name",
+    "Location": "Location",
+    "Locations": "Locations"
   }
 }

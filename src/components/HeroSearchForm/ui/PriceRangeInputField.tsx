@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { PriceRangeSlider } from '@/components/PriceRangeSlider'
-import convertNumbThousand from '@/utils/convertNumbThousand'
-import T from '@/utils/getT'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline'
-import clsx from 'clsx'
-import { FC, useState } from 'react'
-import { ClearDataButton } from './ClearDataButton'
+import { PriceRangeSlider } from '@/components/PriceRangeSlider';
+import convertNumbThousand from '@/utils/convertNumbThousand';
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
+import { FC, useState } from 'react';
+import { ClearDataButton } from './ClearDataButton';
 
 const styles = {
   button: {
@@ -25,15 +25,15 @@ const styles = {
     default: '',
     small: '',
   },
-}
+};
 
 interface Props {
-  className?: string
-  fieldStyle: 'default' | 'small'
-  panelClassName?: string
-  clearDataButtonClassName?: string
-  min?: number
-  max?: number
+  className?: string;
+  fieldStyle: 'default' | 'small';
+  panelClassName?: string;
+  clearDataButtonClassName?: string;
+  min?: number;
+  max?: number;
 }
 
 export const PriceRangeInputField: FC<Props> = ({
@@ -44,8 +44,9 @@ export const PriceRangeInputField: FC<Props> = ({
   min = 0,
   max = 1000000,
 }) => {
-  const [rangePrices, setRangePrices] = useState([90000, 800000])
+  const [rangePrices, setRangePrices] = useState([90000, 800000]);
 
+  const t = useTranslations('HeroSearchForm');
   return (
     <>
       <Popover className={`group relative z-10 flex ${className}`}>
@@ -63,7 +64,7 @@ export const PriceRangeInputField: FC<Props> = ({
                   {`$${convertNumbThousand(rangePrices[0] / 1000)}k ~ $${convertNumbThousand(rangePrices[1] / 1000)}k`}
                 </span>
                 <span className="mt-1 block text-sm leading-none font-light text-neutral-400">
-                  {T['HeroSearchForm']['Choose price range']}
+                  {t('Choose price range')}
                 </span>
               </div>
             </PopoverButton>
@@ -75,12 +76,12 @@ export const PriceRangeInputField: FC<Props> = ({
 
             <PopoverPanel transition className={clsx(panelClassName, styles.panel.base, styles.panel[fieldStyle])}>
               <PriceRangeSlider
-                name={T['HeroSearchForm']['Price range']}
+                name={t('Price range')}
                 min={min}
                 max={max}
                 defaultValue={rangePrices}
                 onChange={(value) => {
-                  setRangePrices(value)
+                  setRangePrices(value);
                 }}
               />
             </PopoverPanel>
@@ -91,5 +92,5 @@ export const PriceRangeInputField: FC<Props> = ({
       <input type="hidden" name="price_min" value={rangePrices[0]} />
       <input type="hidden" name="price_max" value={rangePrices[1]} />
     </>
-  )
-}
+  );
+};

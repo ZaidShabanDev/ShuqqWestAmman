@@ -59,19 +59,15 @@ interface Props {
   className?: string;
   fieldStyle: 'default' | 'small';
   propertyTypes?: PropertyType[];
-  description?: string;
-  placeholder?: string;
 }
-
-const t = useTranslations('HeroSearchForm');
 
 export const PropertyTypeSelectField: FC<Props> = ({
   className = 'flex-1',
   fieldStyle = 'default',
   propertyTypes = defaultPropertyTypes,
-  description = t('Property type'),
-  placeholder = t('Type'),
 }) => {
+  const t = useTranslations('HeroSearchForm');
+
   const [selectedTypes, setSelectedTypes] = useState<string[]>([propertyTypes[0].name]);
   let typeStringConverted = selectedTypes.join(', ');
   return (
@@ -87,9 +83,9 @@ export const PropertyTypeSelectField: FC<Props> = ({
 
             <div className="flex-1">
               <span className={clsx('block font-semibold', styles.mainText[fieldStyle])}>
-                <span className="line-clamp-1">{typeStringConverted || placeholder}</span>
+                <span className="line-clamp-1">{typeStringConverted || t('Type')}</span>
               </span>
-              <span className="mt-1 block text-sm leading-none font-light text-neutral-400">{description}</span>
+              <span className="mt-1 block text-sm leading-none font-light text-neutral-400">{t('Property type')}</span>
             </div>
           </PopoverButton>
 

@@ -1,5 +1,3 @@
-import avatars2 from '@/images/avatars/Image-2.png';
-
 //  REAL-ESTATE LISTING  //
 export async function getRealEstateListings() {
   return [
@@ -259,7 +257,6 @@ export const getRealEstateListingByHandle = async (handle: string) => {
     ],
     host: {
       displayName: 'John Doe',
-      avatarUrl: avatars2.src,
       handle: 'john-doe',
       description:
         'Experienced real estate agent with over 10 years in the industry, specializing in residential properties.',

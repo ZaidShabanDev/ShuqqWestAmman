@@ -1,27 +1,25 @@
-import rightImgPng from '@/images/our-features.png'
-import { Badge } from '@/shared/Badge'
-import { Heading } from '@/shared/Heading'
-import clsx from 'clsx'
-import Image, { StaticImageData } from 'next/image'
-import { FC } from 'react'
+import { Badge } from '@/shared/Badge';
+import { Heading } from '@/shared/Heading';
+import clsx from 'clsx';
+import { StaticImageData } from 'next/image';
+import { FC } from 'react';
 
 interface Props {
-  className?: string
-  rightImg?: StaticImageData
-  type?: 'type1' | 'type2'
-  subHeading?: string
-  heading?: string
+  className?: string;
+  rightImg?: StaticImageData;
+  type?: 'type1' | 'type2';
+  subHeading?: string;
+  heading?: string;
   listItems?: {
-    badge: string
-    badgeColor?: 'red' | 'green' | 'blue'
-    title: string
-    description: string
-  }[]
+    badge: string;
+    badgeColor?: 'red' | 'green' | 'blue';
+    title: string;
+    description: string;
+  }[];
 }
 
 const SectionOurFeatures: FC<Props> = ({
   className,
-  rightImg = rightImgPng,
   type = 'type1',
   subHeading = 'Benefits',
   heading = 'Happening cities',
@@ -53,9 +51,6 @@ const SectionOurFeatures: FC<Props> = ({
         type === 'type1' ? 'lg:flex-row' : 'lg:flex-row-reverse'
       )}
     >
-      <div className="grow">
-        <Image src={rightImg} alt="Features" sizes="(max-width: 1024px) 100vw, 50vw" priority />
-      </div>
       <div className={`mt-10 max-w-2xl shrink-0 lg:mt-0 lg:w-2/5 ${type === 'type1' ? 'lg:ps-16' : 'lg:pe-16'}`}>
         <span className="text-sm tracking-widest text-gray-400 uppercase">{subHeading}</span>
         <Heading className="mt-4">{heading}</Heading>
@@ -71,7 +66,7 @@ const SectionOurFeatures: FC<Props> = ({
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SectionOurFeatures
+export default SectionOurFeatures;
