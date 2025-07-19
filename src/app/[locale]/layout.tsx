@@ -31,7 +31,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={locale} className={poppins.className}>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={poppins.className}>
       <body className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100">
         <ThemeProvider>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>

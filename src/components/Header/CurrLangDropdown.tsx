@@ -1,6 +1,7 @@
 'use client';
 
 import { getLanguages } from '@/data/navigation';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import {
   Popover,
   PopoverButton,
@@ -15,7 +16,8 @@ import {
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
-import { FC, useState } from 'react';
+import { useLocale } from 'next-intl';
+import { FC, useEffect } from 'react';
 
 const Languages = ({
   languages,
@@ -24,17 +26,24 @@ const Languages = ({
   languages: Awaited<ReturnType<typeof getLanguages>>;
   onClose?: () => void;
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(languages.find((lang) => lang.active)?.id || 'English');
+  const router = useRouter();
+  const pathname = usePathname();
+  const locale = useLocale(); // Get current locale from next-intl
+
+  // Set direction based on current locale on component mount and locale change
+  useEffect(() => {
+    const currentLanguage = languages.find((lang) => lang.locale === locale);
+    if (currentLanguage) {
+      document.documentElement.dir = currentLanguage.dir;
+      document.documentElement.lang = currentLanguage.locale;
+    }
+  }, [locale, languages]);
 
   const handleLanguageClick = (language: (typeof languages)[0]) => {
-    // Update the selected language state
-    setSelectedLanguage(language.id);
+    // Use next-intl router to navigate to the same page with new locale
+    router.push(pathname, { locale: language.locale });
 
-    // Set the direction on the document element
-    document.documentElement.dir = language.dir;
-
-    // Also set it on the html element's lang attribute for accessibility
-    document.documentElement.lang = language.id.toLowerCase();
+    // Close the language selector if onClose is provided
     if (onClose) {
       onClose();
     }
@@ -48,7 +57,7 @@ const Languages = ({
           onClick={() => handleLanguageClick(item)}
           className={clsx(
             '-m-2.5 flex w-full cursor-pointer items-center rounded-lg p-2.5 text-left transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
-            selectedLanguage === item.id ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
+            locale === item.locale ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
         >
           <div>
@@ -60,7 +69,6 @@ const Languages = ({
     </div>
   );
 };
-
 interface Props {
   panelAnchor?: PopoverPanelProps['anchor'];
   panelClassName?: PopoverPanelProps['className'];
