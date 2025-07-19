@@ -6,7 +6,6 @@ import SectionVideos from '@/components/SectionVideos';
 import { getRealEstateCategories } from '@/data/categories';
 import { getRealEstateListings } from '@/data/listings';
 import heroImage from '@/images/hero-right.jpg';
-import ourFeatureImage from '@/images/our-features.jpeg';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -54,7 +53,7 @@ async function Home() {
     <main className="relative overflow-hidden">
       <div className="relative container mb-24 flex flex-col gap-y-24 lg:mb-28 lg:gap-y-32">
         <SectionHero />
-        <SectionOurFeatures type="type2" rightImg={ourFeatureImage} />
+        <SectionOurFeatures type="type2" />
         <SectionGridFeatureProperty listing={listings} />
 
         <SectionVideos />
