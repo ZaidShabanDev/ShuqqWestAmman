@@ -1,13 +1,11 @@
 import ourFeatureImage from '@/images/our-features.png';
 import { Badge } from '@/shared/Badge';
 import { Heading } from '@/shared/Heading';
-import clsx from 'clsx';
 import Image from 'next/image';
 import { FC } from 'react';
 
 interface Props {
   className?: string;
-  type?: 'type1' | 'type2';
   subHeading?: string;
   heading?: string;
   listItems?: {
@@ -20,7 +18,6 @@ interface Props {
 
 const SectionOurFeatures: FC<Props> = ({
   className,
-  type = 'type1',
   subHeading = 'Benefits',
   heading = 'Happening cities',
   listItems = [
@@ -44,17 +41,11 @@ const SectionOurFeatures: FC<Props> = ({
   ],
 }) => {
   return (
-    <div
-      className={clsx(
-        'relative flex flex-col items-center',
-        className,
-        type === 'type1' ? 'lg:flex-row' : 'lg:flex-row-reverse'
-      )}
-    >
+    <div className={'relative flex flex-col items-center lg:flex-row'}>
       <div className="grow">
         <Image src={ourFeatureImage} alt="Features" sizes="(max-width: 1024px) 100vw, 50vw" priority />
       </div>
-      <div className={`mt-10 max-w-2xl shrink-0 lg:mt-0 lg:w-2/5 ${type === 'type1' ? 'lg:ps-16' : 'lg:pe-16'}`}>
+      <div className={`mt-10 max-w-2xl shrink-0 lg:mt-0 lg:w-2/5 lg:ps-16`}>
         <span className="text-sm tracking-widest text-gray-400 uppercase">{subHeading}</span>
         <Heading className="mt-4">{heading}</Heading>
 

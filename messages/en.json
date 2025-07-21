@@ -1,7 +1,4 @@
 {
-  "hello_world": "Hello World",
-  "greeting": "Hello",
-  "welcome": "Welcome",
   "NotFound": {
     "page_not_found": "The page you were looking for doesn't exist."
   },

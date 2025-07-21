@@ -46,7 +46,7 @@ async function Home() {
     <main className="relative overflow-hidden">
       <div className="relative container mb-24 flex flex-col gap-y-24 lg:mb-28 lg:gap-y-32">
         <SectionHero />
-        <SectionOurFeatures type="type2" />
+        <SectionOurFeatures />
         <SectionGridFeatureProperty listing={listings} />
 
         <SectionVideos />

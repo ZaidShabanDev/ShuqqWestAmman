@@ -6,38 +6,40 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary-50: rgb(238, 242, 255);
-  --color-primary-100: rgb(224, 231, 255);
-  --color-primary-200: rgb(199, 210, 254);
-  --color-primary-300: rgb(165, 180, 252);
-  --color-primary-400: rgb(129, 140, 248);
-  --color-primary-500: rgb(99, 102, 241);
-  --color-primary-600: rgb(79, 70, 229);
-  --color-primary-700: rgb(67, 56, 202);
-  --color-primary-800: rgb(55, 48, 163);
-  --color-primary-900: rgb(49, 46, 129);
+  --color-primary-50: rgb(248, 248, 248);
+  --color-primary-100: rgb(240, 240, 240);
+  --color-primary-200: rgb(224, 224, 224);
+  --color-primary-300: rgb(192, 192, 192);
+  --color-primary-400: rgb(128, 128, 128);
+  --color-primary-500: rgb(64, 64, 64);
+  --color-primary-600: rgb(32, 32, 32);
+  --color-primary-700: rgb(16, 16, 16);
+  --color-primary-800: rgb(8, 8, 8);
+  --color-primary-900: rgb(0, 0, 0);
 
-  --color-secondary-50: rgb(240, 253, 250);
-  --color-secondary-100: rgb(204, 251, 241);
-  --color-secondary-200: rgb(153, 246, 228);
-  --color-secondary-300: rgb(153, 246, 228);
-  --color-secondary-400: rgb(45, 212, 191);
-  --color-secondary-500: rgb(20, 184, 166);
-  --color-secondary-600: rgb(13, 148, 136);
-  --color-secondary-700: rgb(15, 118, 110);
-  --color-secondary-800: rgb(17, 94, 89);
-  --color-secondary-900: rgb(19, 78, 74);
+  /* Secondary Colors - Blue */
+  --color-secondary-50: rgb(240, 248, 255);
+  --color-secondary-100: rgb(224, 242, 254);
+  --color-secondary-200: rgb(186, 230, 253);
+  --color-secondary-300: rgb(125, 211, 252);
+  --color-secondary-400: rgb(56, 189, 248);
+  --color-secondary-500: rgb(14, 165, 233);
+  --color-secondary-600: rgb(2, 132, 197);
+  --color-secondary-700: rgb(3, 105, 161);
+  --color-secondary-800: rgb(7, 89, 133);
+  --color-secondary-900: rgb(12, 74, 110);
 
-  --color-neutral-50: rgb(249, 250, 251);
-  --color-neutral-100: rgb(243, 244, 246);
-  --color-neutral-200: rgb(229, 231, 235);
-  --color-neutral-300: rgb(209, 213, 219);
-  --color-neutral-400: rgb(156, 163, 175);
-  --color-neutral-500: rgb(107, 114, 128);
-  --color-neutral-600: rgb(75, 85, 99);
-  --color-neutral-700: rgb(55, 65, 81);
-  --color-neutral-800: rgb(31, 41, 55);
-  --color-neutral-900: rgb(17, 24, 39);
+  /* Neutral Colors */
+  --color-neutral-50: rgb(248, 248, 249);
+  --color-neutral-100: rgb(241, 242, 244);
+  --color-neutral-200: rgb(226, 228, 232);
+  --color-neutral-300: rgb(196, 199, 206);
+  --color-neutral-400: rgb(135, 140, 150);
+  --color-neutral-500: rgb(83, 87, 95);
+  --color-neutral-600: rgb(57, 60, 67);
+  --color-neutral-700: rgb(44, 46, 52);
+  --color-neutral-800: rgb(31, 32, 35);
+  --color-neutral-900: rgb(25, 26, 28);
 }
 
 @layer base {
