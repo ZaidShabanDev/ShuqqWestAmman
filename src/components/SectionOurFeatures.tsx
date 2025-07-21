@@ -1,4 +1,4 @@
-import ourFeatureImage from '@/images/our-features.jpeg';
+import ourFeatureImage from '@/images/our-features.png';
 import { Badge } from '@/shared/Badge';
 import { Heading } from '@/shared/Heading';
 import clsx from 'clsx';
