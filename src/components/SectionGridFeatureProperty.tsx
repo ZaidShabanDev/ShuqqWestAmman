@@ -9,28 +9,25 @@ import SectionTabHeader from './SectionTabHeader';
 
 interface Props {
   listing: TRealEstateListing[];
-  heading?: string;
-  subHeading?: string;
   tabs?: string[];
   className?: string;
 }
 
 const SectionGridFeatureProperty: FC<Props> = ({
   listing,
-  heading = 'Find Your Smart Home',
-  subHeading = 'Explore the best properties in the world.',
   tabs = ['New York', 'Tokyo', 'Paris', 'London'],
   className,
 }) => {
   const t = useTranslations('common');
+  const tHero = useTranslations('HeroSearchForm');
 
   return (
     <div className={clsx('relative', className)}>
       <SectionTabHeader
         tabActive={'New York'}
-        subHeading={subHeading}
+        subHeading={tHero("Explore the finest residential and commercial properties in Jordan's capital")}
         tabs={tabs}
-        heading={heading}
+        heading={tHero('Your Perfect Amman Property Awaits')}
         rightButtonHref="/real-estate-categories/all"
       />
       <div className={'mt-8 grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-1 xl:grid-cols-2'}>

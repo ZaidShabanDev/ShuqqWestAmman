@@ -52,6 +52,27 @@
     "Suggested locations": "Suggested locations",
     "Location, city, or property name": "Location, city, or property name",
     "Location": "Location",
-    "Locations": "Locations"
+    "Locations": "Locations",
+    "benefits": "Benefits",
+    "primeProperties": "Prime properties",
+    "listing": "Listing",
+    "professionalPropertyListing": "Professional property listing",
+    "professionalListingDescription": "As your dedicated agent, I showcase your property with professional photography and marketing at no upfront cost",
+    "exposure": "Exposure",
+    "connectWithQualifiedBuyers": "Connect with qualified buyers",
+    "qualifiedBuyersDescription": "I personally match your property with serious buyers actively searching for homes in our local market",
+    "service": "Service",
+    "personalAndReliable": "Personal and reliable",
+    "personalServiceDescription": "With direct owner service, you get personalized attention and a streamlined process for listing and selling your property",
+    "Discover Your": "Discover Your",
+    "Perfect Property": "Perfect Property",
+    "Your Perfect Amman Property Awaits": "Your Perfect Amman Property Awaits",
+    "Explore the finest residential and commercial properties in Jordan's capital": "Explore the finest residential and commercial properties in Jordan's capital"
+  },
+  "Navigation": {
+    "Home": "Home",
+    "Properties": "Properties",
+    "Services": "Services",
+    "About Us": "About Us"
   }
 }

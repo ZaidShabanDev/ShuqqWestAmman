@@ -1,45 +1,40 @@
 import ourFeatureImage from '@/images/our-features.png';
 import { Badge } from '@/shared/Badge';
 import { Heading } from '@/shared/Heading';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FC } from 'react';
 
-interface Props {
-  className?: string;
-  subHeading?: string;
-  heading?: string;
-  listItems?: {
+const SectionOurFeatures: FC = () => {
+  const t = useTranslations('HeroSearchForm');
+  const subHeading = t('benefits');
+  const heading = t('primeProperties');
+  type BadgeColor = 'red' | 'green' | 'blue';
+
+  const listItems: {
     badge: string;
-    badgeColor?: 'red' | 'green' | 'blue';
+    badgeColor?: BadgeColor;
     title: string;
     description: string;
-  }[];
-}
-
-const SectionOurFeatures: FC<Props> = ({
-  className,
-  subHeading = 'Benefits',
-  heading = 'Happening cities',
-  listItems = [
+  }[] = [
     {
-      badge: 'Advertising',
-      title: 'Cost-effective advertising',
-      description: 'With a free listing, you can advertise your rental with no upfront costs',
+      badge: t('listing'),
+      title: t('professionalPropertyListing'),
+      description: t('professionalListingDescription'),
     },
     {
-      badge: 'Exposure',
+      badge: t('exposure'),
       badgeColor: 'green',
-      title: 'Reach millions with Chisfis',
-      description: 'Millions of people are searching for unique places to stay around the world',
+      title: t('connectWithQualifiedBuyers'),
+      description: t('qualifiedBuyersDescription'),
     },
     {
-      badge: 'Secure',
+      badge: t('service'),
       badgeColor: 'red',
-      title: 'Secure and simple',
-      description: 'A Holiday Lettings listing gives you a secure and easy way to take bookings and payments online',
+      title: t('personalAndReliable'),
+      description: t('personalServiceDescription'),
     },
-  ],
-}) => {
+  ];
   return (
     <div className={'relative flex flex-col items-center lg:flex-row'}>
       <div className="grow">

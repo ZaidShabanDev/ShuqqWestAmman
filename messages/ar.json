@@ -52,6 +52,27 @@
     "Suggested locations": "المواقع المقترحة",
     "Location, city, or property name": "الموقع، المدينة، أو اسم العقار",
     "Location": "الموقع",
-    "Locations": "المواقع"
+    "Locations": "المواقع",
+    "benefits": "المزايا",
+    "primeProperties": "العقارات المميزة",
+    "listing": "الإدراج",
+    "professionalPropertyListing": "إدراج عقاري احترافي",
+    "professionalListingDescription": "كوكيلك المختص، أقوم بعرض عقارك بتصوير احترافي وتسويق بدون أي تكاليف مقدمة",
+    "exposure": "التعرض",
+    "connectWithQualifiedBuyers": "التواصل مع المشترين المؤهلين",
+    "qualifiedBuyersDescription": "أقوم شخصياً بربط عقارك مع مشترين جديين يبحثون بنشاط عن منازل في السوق المحلي",
+    "service": "الخدمة",
+    "personalAndReliable": "شخصي وموثوق",
+    "personalServiceDescription": "مع خدمة المالك المباشرة، تحصل على اهتمام شخصي وعملية مبسطة لإدراج وبيع عقارك",
+    "Discover Your": "اكتشف",
+    "Perfect Property": "العقار المناسب لاحتياجاتك",
+    "Your Perfect Amman Property Awaits": "عقارك المثالي في عمّان بانتظارك",
+    "Explore the finest residential and commercial properties in Jordan's capital": "اكتشف أفضل العقارات السكنية والتجارية في عاصمة الأردن"
+  },
+  "Navigation": {
+    "Home": "الرئيسية",
+    "Properties": "العقارات",
+    "Services": "الخدمات",
+    "About Us": "من نحن"
   }
 }

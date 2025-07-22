@@ -7,6 +7,7 @@ import { getRealEstateCategories } from '@/data/categories';
 import { getRealEstateListings } from '@/data/listings';
 import heroImage from '@/images/hero-right.jpg';
 import { Metadata } from 'next';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 const SectionHero = () => {
+  const t = useTranslations('HeroSearchForm');
   return (
     <div className="relative">
       <div className="absolute inset-y-0 end-0 w-full grow lg:w-3/4">
@@ -25,8 +27,8 @@ const SectionHero = () => {
           <div className="absolute inset-y-0 end-20 w-screen bg-primary-500 md:end-40"></div>
           <div className="relative max-w-2xl py-10 text-white sm:py-20 xl:py-24">
             <h2 className="text-4xl/[1.1] font-semibold text-pretty md:text-6xl/[1.1] xl:text-7xl/[1.1]">
-              Discover Your <br />
-              Perfect Property
+              {t('Discover Your')} <br />
+              {t('Perfect Property')}
             </h2>
           </div>
         </div>
