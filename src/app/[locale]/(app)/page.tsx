@@ -25,7 +25,7 @@ const SectionHero = () => {
           className="object-cover"
           src={heroImage}
           alt="hero"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 75vw"
           priority
         />
       </div>

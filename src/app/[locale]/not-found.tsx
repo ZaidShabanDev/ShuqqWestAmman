@@ -1,4 +1,5 @@
 import I404Png from '@/images/404.png';
+import ButtonPrimary from '@/shared/ButtonPrimary';
 import { useTranslations } from 'next-intl';
 // import ButtonPrimary from '@/shared/ButtonPrimary'
 import Image from 'next/image';
@@ -15,7 +16,9 @@ const NotFound = () => {
           <span className="block text-sm font-medium tracking-wider text-neutral-800 sm:text-base dark:text-neutral-200">
             {t(`page_not_found`)}{' '}
           </span>
-          <div className="pt-8">{/* <ButtonPrimary href="/">Return Home Page</ButtonPrimary> */}</div>
+          <div className="pt-8">
+            <ButtonPrimary href="/">Return Home Page</ButtonPrimary>
+          </div>
         </header>
       </div>
     </div>
