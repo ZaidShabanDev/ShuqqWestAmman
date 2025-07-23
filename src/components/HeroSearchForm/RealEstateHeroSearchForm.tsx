@@ -14,8 +14,6 @@ import {
   VerticalDividerLine,
 } from './ui';
 
-type Tab = 'buy' | 'rent' | 'sell';
-
 interface Props {
   className?: string;
   formStyle: 'default' | 'small';

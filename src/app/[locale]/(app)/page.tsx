@@ -20,7 +20,14 @@ const SectionHero = () => {
   return (
     <div className="relative">
       <div className="absolute inset-y-0 end-0 w-full grow lg:w-3/4">
-        <Image className="object-cover" src={heroImage} alt="hero" width={1000} height={1000} priority />
+        <Image
+          fill
+          className="object-cover"
+          src={heroImage}
+          alt="hero"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+        />
       </div>
       <div className="relative py-24 lg:py-20">
         <div className="relative inline-flex">

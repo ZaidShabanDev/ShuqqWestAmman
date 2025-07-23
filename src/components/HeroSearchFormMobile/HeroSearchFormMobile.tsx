@@ -1,6 +1,10 @@
 'use client';
 
-import { Dialog, DialogPanel } from '@headlessui/react';
+import { ButtonCircle } from '@/shared/Button';
+import ButtonPrimary from '@/shared/ButtonPrimary';
+import ButtonThird from '@/shared/ButtonThird';
+import { CloseButton, Dialog, DialogPanel, TabGroup, TabPanel, TabPanels } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 import { FilterVerticalIcon, Search01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import clsx from 'clsx';
@@ -10,13 +14,14 @@ import { useTimeoutFn } from 'react-use';
 import RealestateSearchFormMobile from './RealestateSearchFormMobile';
 
 const HeroSearchFormMobile = ({ className }: { className?: string }) => {
+  const t = useTranslations('common');
   const tHero = useTranslations('HeroSearchForm');
   const [showModal, setShowModal] = useState(false);
 
   // FOR RESET ALL DATA WHEN CLICK CLEAR BUTTON
   const [showDialog, setShowDialog] = useState(false);
   let [, , resetIsShowingDialog] = useTimeoutFn(() => setShowDialog(true), 1);
-  //
+
   function closeModal() {
     setShowModal(false);
   }
@@ -57,7 +62,37 @@ const HeroSearchFormMobile = ({ className }: { className?: string }) => {
               transition
               className="relative flex-1 transition data-closed:translate-y-28 data-closed:opacity-0"
             >
-              {showDialog && <RealestateSearchFormMobile />}
+              {showDialog && (
+                <TabGroup manual className="relative flex h-full flex-1 flex-col justify-between">
+                  <div className="absolute end-3 top-2 z-10">
+                    <CloseButton color="light" as={ButtonCircle} className="size-7!">
+                      <XMarkIcon className="size-4!" />
+                    </CloseButton>
+                  </div>
+
+                  <TabPanels className="flex flex-1 overflow-hidden px-1.5 pt-5 sm:px-4">
+                    <div className="hidden-scrollbar flex-1 overflow-y-auto pt-2 pb-4">
+                      <TabPanel as="div" className="animate-[myblur_0.4s_ease-in-out] transition-opacity">
+                        <RealestateSearchFormMobile />
+                      </TabPanel>
+                    </div>
+                  </TabPanels>
+                  <div className="flex justify-between border-t border-neutral-200 bg-white px-4 py-3 dark:border-neutral-700 dark:bg-neutral-900">
+                    <ButtonThird
+                      onClick={() => {
+                        setShowDialog(false);
+                        resetIsShowingDialog();
+                      }}
+                    >
+                      {t('Clear All')}
+                    </ButtonThird>
+                    <ButtonPrimary type="submit" form="form-hero-search-form-mobile" onClick={closeModal}>
+                      <HugeiconsIcon icon={Search01Icon} size={16} />
+                      <span>{t('search')}</span>
+                    </ButtonPrimary>
+                  </div>
+                </TabGroup>
+              )}
             </DialogPanel>
           </div>
         </div>
