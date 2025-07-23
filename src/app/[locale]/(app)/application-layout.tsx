@@ -1,8 +1,8 @@
 import Aside from '@/components/aside';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header/Header';
+import HeroSearchFormMobile from '@/components/HeroSearchFormMobile/HeroSearchFormMobile';
 // import FooterQuickNavigation from '@/components/FooterQuickNavigation';
-// import HeroSearchFormMobile from '@/components/HeroSearchFormMobile/HeroSearchFormMobile';
 // import AsideSidebarNavigation from '@/components/aside-sidebar-navigation';
 import 'rc-slider/assets/index.css';
 import React, { ReactNode } from 'react';
@@ -19,7 +19,7 @@ const ApplicationLayout: React.FC<Props> = ({ children, header }) => {
       <div className="relative z-20 hidden lg:block">{header ? header : <Header />}</div>
       {/* HeroSearchFormMobile - will display on mobile devices instead of Header-desktop */}
       <div className="sticky top-0 z-20 bg-white shadow-xs lg:hidden dark:bg-neutral-900">
-        <div className="container flex h-20 items-center justify-center">{/* <HeroSearchFormMobile /> */}</div>
+        <div className="container flex h-20 items-center justify-center"><HeroSearchFormMobile /></div>
       </div>
       {/*  */}
       {children}
