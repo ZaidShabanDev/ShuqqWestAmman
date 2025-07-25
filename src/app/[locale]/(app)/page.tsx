@@ -2,7 +2,6 @@ import { RealEstateHeroSearchForm } from '@/components/HeroSearchForm/RealEstate
 import SectionClientSay from '@/components/SectionClientSay';
 import SectionGridFeatureProperty from '@/components/SectionGridFeatureProperty';
 import SectionOurFeatures from '@/components/SectionOurFeatures';
-import SectionVideos from '@/components/SectionVideos';
 import { getRealEstateCategories } from '@/data/categories';
 import { getRealEstateListings } from '@/data/listings';
 import heroImage from '@/images/hero-right.jpg';
@@ -57,11 +56,7 @@ async function Home() {
         <SectionHero />
         <SectionOurFeatures />
         <SectionGridFeatureProperty listing={listings} />
-
-        <SectionVideos />
-        <div className="relative py-16">
-          <SectionClientSay />
-        </div>
+        <SectionClientSay />
       </div>
     </main>
   );
