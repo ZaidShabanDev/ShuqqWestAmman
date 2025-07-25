@@ -61,7 +61,7 @@ export function Aside({
               <div className="flex h-full flex-col px-4 md:px-8">
                 {showHeading ? (
                   <header
-                    className={`flex h-16 flex-shrink-0 items-center border-b border-neutral-900/10 md:h-20 ${
+                    className={`mt-2 flex h-16 flex-shrink-0 items-center border-b border-neutral-900/10 md:h-20 ${
                       hasHeading ? 'justify-between' : 'justify-end'
                     }`}
                   >

@@ -1,6 +1,6 @@
 'use client';
 
-import { Bars3Icon, HeartIcon, MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,16 +13,6 @@ const FOOTER_QUICK_NAV = [
     name: 'Explore',
     link: '/',
     icon: MagnifyingGlassIcon,
-  },
-  {
-    name: 'Wishlists',
-    link: '/account-savelists',
-    icon: HeartIcon,
-  },
-  {
-    name: 'Account',
-    link: '/authors/john-doe',
-    icon: UserCircleIcon,
   },
   {
     name: 'Menu',
