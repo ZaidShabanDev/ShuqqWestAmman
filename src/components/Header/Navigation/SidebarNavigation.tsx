@@ -2,6 +2,7 @@
 
 import { getLanguages, TNavigationItem } from '@/data/navigation';
 import SocialsList from '@/shared/SocialsList';
+import SwitchDarkMode from '@/shared/SwitchDarkMode';
 import { Divider } from '@/shared/divider';
 import { Link } from '@/shared/link';
 import { Disclosure, DisclosureButton, DisclosurePanel, useClose } from '@headlessui/react';
@@ -9,6 +10,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Search01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 import Form from 'next/form';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -74,6 +76,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
   };
 
   const _renderItem = (menu: TNavigationItem, index: number) => {
+    const t = useTranslations('Navigation');
     return (
       <Disclosure key={index} as="li" className="text-neutral-900 dark:text-white">
         <DisclosureButton className="flex w-full cursor-pointer rounded-lg px-3 text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
@@ -82,7 +85,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
             className={clsx(!menu.children?.length && 'flex-1', 'block py-2.5')}
             onClick={handleClose}
           >
-            {menu.name}
+            {t(menu.name ?? '')}
           </Link>
           {menu.children?.length && (
             <div className="flex flex-1 justify-end">
@@ -127,9 +130,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
       <ul className="flex flex-col gap-y-1 px-2 py-6">{data?.map(_renderItem)}</ul>
       <Divider className="mb-6" />
 
-      {/* FOR OUR DEMO */}
-
-      <div className="flex items-center justify-between gap-x-2.5 py-6">
+      <div className="flex items-center justify-center gap-x-2.5 py-6">
         <CurrLangDropdown
           languages={languages}
           panelAnchor={{
@@ -138,6 +139,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
           }}
           panelClassName="z-10 w-72 p-4!"
         />
+        <SwitchDarkMode />
       </div>
     </div>
   );

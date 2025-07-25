@@ -1,9 +1,9 @@
 import Aside from '@/components/aside';
+import AsideSidebarNavigation from '@/components/aside-sidebar-navigation';
 import Footer from '@/components/Footer';
+import FooterQuickNavigation from '@/components/FooterQuickNavigation';
 import Header from '@/components/Header/Header';
 import HeroSearchFormMobile from '@/components/HeroSearchFormMobile/HeroSearchFormMobile';
-// import FooterQuickNavigation from '@/components/FooterQuickNavigation';
-// import AsideSidebarNavigation from '@/components/aside-sidebar-navigation';
 import 'rc-slider/assets/index.css';
 import React, { ReactNode } from 'react';
 
@@ -24,9 +24,9 @@ const ApplicationLayout: React.FC<Props> = ({ children, header }) => {
       </div>
       {children}
       {/* FooterQuickNavigation - Displays on mobile devices and is fixed at the bottom of the screen */}
-      {/* <FooterQuickNavigation /> */}
+      <FooterQuickNavigation />
       <Footer />
-      {/* <AsideSidebarNavigation /> */}
+      <AsideSidebarNavigation />
     </Aside.Provider>
   );
 };

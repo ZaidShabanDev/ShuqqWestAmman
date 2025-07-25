@@ -1,4 +1,4 @@
-import { Facebook01Icon, Mail01Icon, NewTwitterIcon } from '@hugeicons/core-free-icons';
+import { Facebook01Icon, InstagramIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -13,18 +13,13 @@ interface Props {
 const socialsDemo: SocialType[] = [
   {
     name: 'Facebook',
-    href: '#',
+    href: 'https://www.facebook.com/profile.php?id=61558172070050',
     icon: Facebook01Icon,
   },
   {
-    name: 'Email',
-    href: '#',
-    icon: Mail01Icon,
-  },
-  {
-    name: 'Twitter',
-    href: '#',
-    icon: NewTwitterIcon,
+    name: 'Instagram',
+    href: 'https://www.instagram.com/apartments_for_sale_amman/',
+    icon: InstagramIcon,
   },
 ];
 
