@@ -80,5 +80,11 @@
     "Properties": "العقارات",
     "Services": "الخدمات",
     "About Us": "من نحن"
+  },
+  "MobileFooter": {
+    "subtitle": "ابحث عن منزل أحلامك أو فرصة استثمارية مثالية في العاصمة النابضة بالحياة في الأردن"
+  },
+  "Placeholder": {
+    "Type and press enter": "اكتب واضغط إدخال"
   }
 }

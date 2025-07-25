@@ -99,6 +99,8 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
   };
 
   const renderSearchForm = () => {
+    const tPlaceholder = useTranslations('Placeholder');
+
     return (
       <Form className="flex-1 text-neutral-900 dark:text-neutral-200" action={handleSubmitForm}>
         <div className="flex h-full items-center gap-x-2.5 rounded-xl bg-neutral-50 px-3 py-3 dark:bg-white/5">
@@ -110,7 +112,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
             autoComplete="off"
             aria-label="Search for articles"
             data-autofocus
-            placeholder="Type and press enter"
+            placeholder={tPlaceholder('Type and press enter')}
             className="w-full border-none bg-transparent focus:ring-0 focus:outline-hidden sm:text-sm"
           />
         </div>
@@ -119,9 +121,10 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
     );
   };
 
+  const t = useTranslations('MobileFooter');
   return (
     <div>
-      <span>Discover the most outstanding articles on all topics of life. Write your stories and share them</span>
+      <span>{t('subtitle')}</span>
 
       <div className="mt-4 flex items-center justify-between">
         <SocialsList itemClass="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full text-xl" />
