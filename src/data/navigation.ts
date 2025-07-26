@@ -11,14 +11,9 @@ export async function getNavigation(): Promise<TNavigationItem[]> {
       name: 'Properties',
     },
     {
-      id: '3',
-      href: '/services',
-      name: 'Services',
-    },
-    {
       id: '4',
-      href: '/about',
-      name: 'About Us',
+      href: '/contact',
+      name: 'Contact Us',
     },
   ];
 }
