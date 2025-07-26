@@ -1,0 +1,62 @@
+import HeroSectionWithSearchForm from '@/components/Header/HeroSectionWithSearchForm';
+import { RealEstateHeroSearchForm } from '@/components/HeroSearchForm/RealEstateHeroSearchForm';
+import ListingFilterTabs from '@/components/ListingFilterTabs';
+import PropertyCardH from '@/components/PropertyCardH';
+import { getRealEstateListingFilterOptions, getRealEstateListings } from '@/data/listings';
+import realEstateCategoryCoverImage from '@/images/hero-right-real-estate.png';
+import { Divider } from '@/shared/divider';
+import Pagination from '@/shared/Pagination';
+import { House01Icon, MapPinpoint02Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+const Page = async () => {
+  const listings = await getRealEstateListings();
+  const filterOptions = await getRealEstateListingFilterOptions();
+
+  return (
+    <div className="pb-28">
+      {/* Hero section */}
+      <div className="container">
+        <HeroSectionWithSearchForm
+          heading={'Shuqq West Amman'}
+          image={realEstateCategoryCoverImage}
+          imageAlt={'Shuqq West Amman'}
+          searchForm={<RealEstateHeroSearchForm formStyle="default" />}
+          description={
+            <div className="flex items-center sm:text-lg">
+              <HugeiconsIcon icon={MapPinpoint02Icon} size={20} color="currentColor" strokeWidth={1.5} />
+              <span className="ms-2.5">{'Jordan'} </span>
+              <span className="mx-5"></span>
+              <HugeiconsIcon icon={House01Icon} size={20} color="currentColor" strokeWidth={1.5} />
+              <span className="ms-2.5">20 properties</span>
+            </div>
+          }
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative container mt-14 lg:mt-24">
+        {/* start heading */}
+        <div className="flex flex-wrap items-end justify-between gap-x-2.5 gap-y-5">
+          <h2 id="heading" className="scroll-mt-20 text-lg font-semibold text-pretty sm:text-xl">
+            Over 20 properties
+          </h2>
+        </div>
+        <Divider className="my-8 md:mb-12" />
+        {/* end heading */}
+
+        <ListingFilterTabs filterOptions={filterOptions} />
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:mt-10 xl:grid-cols-2">
+          {listings.map((listing) => (
+            <PropertyCardH key={listing.id} data={listing} />
+          ))}
+        </div>
+        <div className="mt-20 flex items-center justify-center">
+          <Pagination />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Page;
