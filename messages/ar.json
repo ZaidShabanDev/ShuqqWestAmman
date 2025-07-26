@@ -87,5 +87,17 @@
   },
   "Placeholder": {
     "Type and press enter": "اكتب واضغط إدخال"
+  },
+  "Contact": {
+    "title": "اتصل بنا",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "مثال: محمد علي",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "emailAddressPlaceholder": "example@example.com",
+    "message": "الرسالة",
+    "sendMessage": "إرسال رسالة",
+    "socials": "الروابط الاجتماعية",
+    "PHONE": "الهاتف",
+    "EMAIL": "البريد الإلكتروني"
   }
 }

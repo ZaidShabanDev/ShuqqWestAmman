@@ -87,5 +87,17 @@
   },
   "Placeholder": {
     "Type and press enter": "Type and press enter"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Example Doe",
+    "emailAddress": "Email address",
+    "emailAddressPlaceholder": "example@example.com",
+    "message": "Message",
+    "sendMessage": "Send Message",
+    "socials": "Socials",
+    "PHONE": "PHONE",
+    "EMAIL": "EMAIL"
   }
 }
