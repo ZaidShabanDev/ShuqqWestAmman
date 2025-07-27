@@ -34,7 +34,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
     maxGuests,
   } = data;
 
-  const listingHref = `/real-estate-listings/${listingHandle}`;
+  const listingHref = `/properties-list/${listingHandle}`;
 
   const renderSliderGallery = () => {
     return (
