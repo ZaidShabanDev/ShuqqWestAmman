@@ -15,7 +15,7 @@ interface Props {
 
 const SectionGridFeatureProperty: FC<Props> = ({
   listing,
-  tabs = ['New York', 'Tokyo', 'Paris', 'London'],
+  tabs = ['Dabouq', 'Abdoun', 'Jabal Amman', 'Al Weibdeh', 'Swefieh'],
   className,
 }) => {
   const t = useTranslations('common');
@@ -24,11 +24,11 @@ const SectionGridFeatureProperty: FC<Props> = ({
   return (
     <div className={clsx('relative', className)}>
       <SectionTabHeader
-        tabActive={'New York'}
+        tabActive={'Dabouq'}
         subHeading={tHero("Explore the finest residential and commercial properties in Jordan's capital")}
         tabs={tabs}
         heading={tHero('Your Perfect Amman Property Awaits')}
-        rightButtonHref="/real-estate-categories/all"
+        rightButtonHref="/properties"
       />
       <div className={'mt-8 grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-1 xl:grid-cols-2'}>
         {listing.map((listing) => {
@@ -36,7 +36,7 @@ const SectionGridFeatureProperty: FC<Props> = ({
         })}
       </div>
       <div className="mt-16 flex items-center justify-center">
-        <ButtonPrimary href={'/real-estate-categories/all'}>
+        <ButtonPrimary href={'/properties'}>
           {t('Show me more')}
           <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" />
         </ButtonPrimary>

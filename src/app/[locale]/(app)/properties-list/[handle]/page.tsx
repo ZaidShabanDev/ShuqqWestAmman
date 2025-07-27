@@ -21,7 +21,6 @@ import { Button } from '@/shared/Button';
 import ButtonSecondary from '@/shared/ButtonSecondary';
 import { DescriptionDetails, DescriptionList, DescriptionTerm } from '@/shared/description-list';
 import { Divider } from '@/shared/divider';
-import { UsersIcon } from '@heroicons/react/24/outline';
 import { CropIcon, Flag03Icon, Mail01Icon, Navigation03Icon, SmartPhone01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Metadata } from 'next';
@@ -62,15 +61,9 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
     description,
     featuredImage,
     galleryImgs,
-    isAds,
-    like,
+
     listingCategory,
-    map,
-    maxGuests,
     price,
-    reviewCount,
-    reviewStart,
-    saleOff,
     title,
     host,
     acreage,
@@ -78,17 +71,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
 
   const renderSectionHeader = () => {
     return (
-      <SectionHeader
-        address={address}
-        listingCategory={listingCategory}
-        reviewCount={reviewCount}
-        reviewStart={reviewStart}
-        title={title}
-      >
-        <div className="flex items-center gap-x-3">
-          <UsersIcon className="mb-0.5 size-6" />
-          <span>{maxGuests} guests</span>
-        </div>
+      <SectionHeader address={address} listingCategory={listingCategory} title={title}>
         <div className="flex items-center gap-x-3">
           <HugeiconsIcon icon={CropIcon} size={24} strokeWidth={1.5} />
           <span>{acreage} Sq.Fit</span>

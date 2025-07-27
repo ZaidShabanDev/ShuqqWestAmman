@@ -55,6 +55,7 @@ async function Home() {
       <div className="relative container mb-24 flex flex-col gap-y-24 lg:mb-28 lg:gap-y-32">
         <SectionHero />
         <SectionOurFeatures />
+        {/* send here the categories (tabs) */}
         <SectionGridFeatureProperty listing={listings} />
         <SectionClientSay />
       </div>

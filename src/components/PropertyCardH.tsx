@@ -6,8 +6,6 @@ import { FC } from 'react';
 import BtnLikeIcon from './BtnLikeIcon';
 import GallerySlider from './GallerySlider';
 import { Bathtub01Icon, BedSingle01Icon, CropIcon, Share07Icon } from './Icons';
-import SaleOffBadge from './SaleOffBadge';
-import StartRating from './StartRating';
 
 interface PropertyCardHProps {
   className?: string;
@@ -19,19 +17,13 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
     galleryImgs,
     title,
     handle: listingHandle,
-    like,
-    saleOff,
-    isAds,
     price,
-    reviewStart,
-    reviewCount,
     acreage,
     bathrooms,
     bedrooms,
     address,
     date,
     listingCategory,
-    maxGuests,
   } = data;
 
   const listingHref = `/properties-list/${listingHandle}`;
@@ -45,8 +37,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
           className="h-full w-full overflow-hidden rounded-2xl"
           href={listingHref}
         />
-
-        {saleOff && <SaleOffBadge className="absolute start-5 top-5 bg-orange-500!" />}
       </div>
     );
   };
@@ -99,7 +89,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
             </Badge>
           </div>
           <div className="flex items-center gap-x-2">
-            {isAds && <Badge color="green">Ads</Badge>}
             <h2 className="text-lg font-medium capitalize">
               <span className="line-clamp-2">{title}</span>
             </h2>
@@ -107,7 +96,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
           {renderTienIch()}
           <div className="w-14 border-b border-neutral-200/80 dark:border-neutral-700"></div>
           <div className="flex w-full items-end justify-between">
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
             <span className="flex items-center justify-center rounded-lg border-2 border-secondary-500 px-2.5 py-1.5 text-sm leading-none font-medium text-secondary-500">
               {price}
             </span>
@@ -128,7 +116,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
       </div>
       <BtnLikeIcon
         colorClass="bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200/70 text-neutral-600 dark:text-neutral-400"
-        isLiked={like}
         className="absolute end-5 top-5 sm:end-3 sm:top-3"
       />
     </div>
