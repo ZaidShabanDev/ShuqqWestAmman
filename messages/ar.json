@@ -99,5 +99,10 @@
     "socials": "الروابط الاجتماعية",
     "PHONE": "الهاتف",
     "EMAIL": "البريد الإلكتروني"
+  },
+  "RealEstate": {
+    "Shuqq West Amman": "شقق غرب عمان",
+    "Jordan": "الأردن",
+    "properties": "العقارات"
   }
 }

@@ -99,5 +99,10 @@
     "socials": "Socials",
     "PHONE": "PHONE",
     "EMAIL": "EMAIL"
+  },
+  "RealEstate": {
+    "Shuqq West Amman": "Shuqq West Amman",
+    "Jordan": "Jordan",
+    "properties": "properties"
   }
 }

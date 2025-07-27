@@ -8,27 +8,31 @@ import { Divider } from '@/shared/divider';
 import Pagination from '@/shared/Pagination';
 import { House01Icon, MapPinpoint02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import { getTranslations } from 'next-intl/server';
 
-const Page = async () => {
+async function Page() {
   const listings = await getRealEstateListings();
   const filterOptions = await getRealEstateListingFilterOptions();
 
+  const t = await getTranslations('RealEstate');
   return (
     <div className="pb-28">
       {/* Hero section */}
       <div className="container">
         <HeroSectionWithSearchForm
-          heading={'Shuqq West Amman'}
+          heading={t('Shuqq West Amman')}
           image={realEstateCategoryCoverImage}
-          imageAlt={'Shuqq West Amman'}
+          imageAlt={t('Shuqq West Amman')}
           searchForm={<RealEstateHeroSearchForm formStyle="default" />}
           description={
             <div className="flex items-center sm:text-lg">
               <HugeiconsIcon icon={MapPinpoint02Icon} size={20} color="currentColor" strokeWidth={1.5} />
-              <span className="ms-2.5">{'Jordan'} </span>
+              <span className="ms-2.5">{t('Jordan')} </span>
               <span className="mx-5"></span>
               <HugeiconsIcon icon={House01Icon} size={20} color="currentColor" strokeWidth={1.5} />
-              <span className="ms-2.5">20 properties</span>
+              <span className="ms-2.5">
+                {listings.length} {t('properties')}
+              </span>
             </div>
           }
         />
@@ -57,6 +61,6 @@ const Page = async () => {
       </div>
     </div>
   );
-};
+}
 
 export default Page;
