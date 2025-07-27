@@ -16,7 +16,6 @@ import {
 import HeaderGallery from '@/components/listingsDetialsComponents/HeaderGallery';
 import SectionHeader from '@/components/listingsDetialsComponents/SectionHeader';
 import { SectionHeading, SectionSubheading } from '@/components/listingsDetialsComponents/SectionHeading';
-import SectionHost from '@/components/listingsDetialsComponents/SectionHost';
 import { getRealEstateListingByHandle } from '@/data/listings';
 import { Button } from '@/shared/Button';
 import ButtonSecondary from '@/shared/ButtonSecondary';
@@ -175,7 +174,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
     ];
 
     return (
-      <div className="listingSection__wrap">
+      <div className="mb-5 listingSection__wrap">
         <div>
           <SectionHeading>Property features</SectionHeading>
           <SectionSubheading>About the property&apos;s amenities and services</SectionSubheading>
@@ -263,16 +262,6 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
           <div className="sticky top-5">{renderSidebarPriceAndForm()}</div>
         </div>
       </main>
-
-      <Divider className="my-16" />
-
-      <div className="flex flex-col gap-y-10">
-        <div className="flex flex-col gap-8 lg:flex-row lg:gap-10">
-          <div className="w-full lg:w-4/9 xl:w-1/3">
-            <SectionHost {...host} />
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
