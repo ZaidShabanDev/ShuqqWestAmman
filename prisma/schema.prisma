@@ -7,3 +7,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Property {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title           String
+  handle          String   @unique
+  description     String?
+  date            DateTime
+  listingCategory String
+  featuredImage   String?
+  galleryImgs     String[] // Array of image URLs
+  address         String
+  price           String // Stored as string to handle currency formatting
+  bedrooms        Int
+  bathrooms       Int
+  acreage         Float
+  createdAt       DateTime @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime @updatedAt
+
+  @@map("properties")
+}

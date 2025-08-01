@@ -43,7 +43,7 @@ async function Page() {
         {/* start heading */}
         <div className="flex flex-wrap items-end justify-between gap-x-2.5 gap-y-5">
           <h2 id="heading" className="scroll-mt-20 text-lg font-semibold text-pretty sm:text-xl">
-            Over 20 properties
+            Over {listings.length} properties
           </h2>
         </div>
         <Divider className="my-8 md:mb-12" />
