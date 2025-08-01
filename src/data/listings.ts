@@ -1,30 +1,6 @@
+import { getRealEstateListings } from '@/lib/actions/property.actions';
+
 //  REAL-ESTATE LISTING  //
-export async function getRealEstateListings() {
-  return [
-    {
-      id: 'real-estate-listing://1',
-      title: 'Best Western Cedars Hotel ',
-      handle: 'best-western-cedars-hotel',
-      description: 'Located in the heart of the city',
-      date: 'May 20, 2021',
-      listingCategory: 'Entire cabin',
-      featuredImage:
-        'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      galleryImgs: [
-        'https://images.unsplash.com/photo-1604145195376-e2c8195adf29?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.pexels.com/photos/6969831/pexels-photo-6969831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-        'https://images.pexels.com/photos/6438752/pexels-photo-6438752.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-        'https://images.pexels.com/photos/1320686/pexels-photo-1320686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-        'https://images.pexels.com/photos/261394/pexels-photo-261394.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-      ],
-      address: '1 Anzinger Court',
-      price: '$26',
-      bedrooms: 10,
-      bathrooms: 3,
-      acreage: 100,
-    },
-  ];
-}
 export const getRealEstateListingByHandle = async (handle: string) => {
   const listings = await getRealEstateListings();
   let listing = listings.find((listing) => listing.handle === handle);

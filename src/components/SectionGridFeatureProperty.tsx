@@ -9,13 +9,11 @@ import SectionTabHeader from './SectionTabHeader';
 
 interface Props {
   listing: TRealEstateListing[];
-  tabs?: string[];
   className?: string;
 }
 
 const SectionGridFeatureProperty: FC<Props> = ({
   listing,
-  tabs = ['Dabouq', 'Abdoun', 'Jabal Amman', 'Al Weibdeh', 'Swefieh'],
   className,
 }) => {
   const t = useTranslations('common');
@@ -24,9 +22,7 @@ const SectionGridFeatureProperty: FC<Props> = ({
   return (
     <div className={clsx('relative', className)}>
       <SectionTabHeader
-        tabActive={'Dabouq'}
         subHeading={tHero("Explore the finest residential and commercial properties in Jordan's capital")}
-        tabs={tabs}
         heading={tHero('Your Perfect Amman Property Awaits')}
         rightButtonHref="/properties"
       />

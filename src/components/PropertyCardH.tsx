@@ -1,11 +1,11 @@
 import { TRealEstateListing } from '@/data/listings';
 import { Badge } from '@/shared/Badge';
-import { UserIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { FC } from 'react';
-import BtnLikeIcon from './BtnLikeIcon';
 import GallerySlider from './GallerySlider';
-import { Bathtub01Icon, BedSingle01Icon, CropIcon, Share07Icon } from './Icons';
+import { Bathtub01Icon, BedSingle01Icon, CropIcon } from './Icons';
 
 interface PropertyCardHProps {
   className?: string;
@@ -42,13 +42,16 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
   };
 
   const renderTienIch = () => {
+    const t = useTranslations('RealEstate');
     return (
       <div className="inline-grid grid-cols-3 gap-2">
         <div className="flex items-center gap-x-2">
           <span className="hidden sm:inline-block">
             <BedSingle01Icon className="h-4 w-4" />
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">{bedrooms} beds</span>
+          <span className="text-xs text-neutral-500 dark:text-neutral-400">
+            {bedrooms} {t('beds')}
+          </span>
         </div>
 
         {/* ---- */}
@@ -56,7 +59,9 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
           <span className="hidden sm:inline-block">
             <Bathtub01Icon className="h-4 w-4" />
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">{bathrooms} baths</span>
+          <span className="text-xs text-neutral-500 dark:text-neutral-400">
+            {bathrooms} {t('baths')}
+          </span>
         </div>
 
         {/* ---- */}
@@ -64,27 +69,24 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
           <span className="hidden sm:inline-block">
             <CropIcon className="h-4 w-4" />
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">{acreage} Sq. Fit</span>
+          <span className="text-xs text-neutral-500 dark:text-neutral-400">
+            {acreage} {t('SqFit')}
+          </span>
         </div>
       </div>
     );
   };
 
   const renderContent = () => {
+    const t = useTranslations('RealEstate');
     return (
       <div className="flex grow flex-col items-start p-3 sm:pe-6">
         <div className="w-full space-y-4">
           <div className="inline-flex gap-x-3">
-            <Badge>
-              <div className="flex items-center">
-                <Share07Icon className="h-3 w-3" />
-                <span className="ms-1">4 Network</span>
-              </div>
-            </Badge>
             <Badge color="yellow">
               <div className="flex items-center">
-                <UserIcon className="h-3 w-3" />
-                <span className="ms-1">Family</span>
+                <MapPinIcon className="h-3 w-3" />
+                <span className="ms-1">{address}</span>
               </div>
             </Badge>
           </div>
@@ -114,10 +116,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
         {renderSliderGallery()}
         {renderContent()}
       </div>
-      <BtnLikeIcon
-        colorClass="bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200/70 text-neutral-600 dark:text-neutral-400"
-        className="absolute end-5 top-5 sm:end-3 sm:top-3"
-      />
     </div>
   );
 };

@@ -103,6 +103,10 @@
   "RealEstate": {
     "Shuqq West Amman": "شقق غرب عمان",
     "Jordan": "الأردن",
-    "properties": "العقارات"
+    "properties": "العقارات",
+    "beds": "أسرة",
+    "baths": "حمامات",
+    "SqFit": "قدم مربع",
+    "Family": "عائلة"
   }
 }

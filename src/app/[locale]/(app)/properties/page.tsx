@@ -2,8 +2,9 @@ import HeroSectionWithSearchForm from '@/components/Header/HeroSectionWithSearch
 import { RealEstateHeroSearchForm } from '@/components/HeroSearchForm/RealEstateHeroSearchForm';
 import ListingFilterTabs from '@/components/ListingFilterTabs';
 import PropertyCardH from '@/components/PropertyCardH';
-import { getRealEstateListingFilterOptions, getRealEstateListings } from '@/data/listings';
+import { getRealEstateListingFilterOptions } from '@/data/listings';
 import realEstateCategoryCoverImage from '@/images/hero-right-real-estate.png';
+import { getRealEstateListings } from '@/lib/actions/property.actions';
 import { Divider } from '@/shared/divider';
 import Pagination from '@/shared/Pagination';
 import { House01Icon, MapPinpoint02Icon } from '@hugeicons/core-free-icons';
