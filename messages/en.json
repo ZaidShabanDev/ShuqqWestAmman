@@ -107,6 +107,8 @@
     "beds": "beds",
     "baths": "baths",
     "SqFit": "Sq. Fit",
-    "Family": "Family"
+    "Family": "Family",
+    "Over": "Over",
+    "propertiesObj": "properties"
   }
 }

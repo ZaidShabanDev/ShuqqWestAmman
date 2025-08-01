@@ -1,11 +1,10 @@
 'use client';
 
-import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Form from 'next/form';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import {
   ButtonSubmit,
   LocationInputField,
@@ -21,15 +20,8 @@ interface Props {
 
 export const RealEstateHeroSearchForm: FC<Props> = ({ className, formStyle = 'default' }) => {
   const t = useTranslations('HeroSearchForm');
-
-  const tabs = [
-    { value: 'buy', label: t('Buy') },
-    { value: 'rent', label: t('Rent') },
-    { value: 'sell', label: t('Sell') },
-  ] as const;
-
-  const [tabType, setTabType] = useState<Tab>(tabs[0].value);
   const router = useRouter();
+
   // Prefetch the stay categories page to improve performance
   useEffect(() => {
     router.prefetch('/real-estate-categories/all');
@@ -60,30 +52,6 @@ export const RealEstateHeroSearchForm: FC<Props> = ({ className, formStyle = 'de
           'rounded-t-2xl rounded-b-[40px] shadow-xl xl:rounded-t-3xl xl:rounded-b-[48px] dark:shadow-2xl'
       )}
     >
-      {/* RADIO */}
-      <Headless.RadioGroup
-        value={tabType}
-        onChange={setTabType}
-        aria-label="Real Estate Tab Type"
-        name="real_estate_tab_type"
-        className={clsx(
-          'flex flex-wrap items-center gap-2.5 border-b border-neutral-100 dark:border-neutral-700',
-          formStyle === 'small' && 'px-7 py-4 xl:px-8',
-          formStyle === 'default' && 'px-7 py-4 xl:px-8 xl:py-6'
-        )}
-      >
-        {tabs.map((tab) => (
-          <Headless.Field key={tab.value}>
-            <Headless.Radio
-              value={tab.value}
-              className={`flex cursor-pointer items-center rounded-full border border-neutral-300 px-4 py-1.5 text-xs font-medium data-checked:bg-black data-checked:text-white data-checked:shadow-lg data-checked:shadow-black/10 dark:border-neutral-700 dark:data-checked:bg-neutral-200 dark:data-checked:text-neutral-900`}
-            >
-              {tab.label}
-            </Headless.Radio>
-          </Headless.Field>
-        ))}
-      </Headless.RadioGroup>
-
       {/*  */}
       <div className="relative flex">
         <LocationInputField className="hero-search-form__field-after flex-1" fieldStyle={formStyle} />
