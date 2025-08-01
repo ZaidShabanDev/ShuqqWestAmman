@@ -1,4 +1,5 @@
 import { routing } from '@/i18n/routing';
+import { APP_DESCRIPTION, APP_NAME } from '@/lib/constants';
 import '@/styles/tailwind.css';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -14,10 +15,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Shuqq West Amman',
-    default: 'Shuqq West Amman - Premium Real Estate in Amman',
+    template: `%s - ${APP_NAME}`,
+    default: `${APP_NAME} - ${APP_DESCRIPTION}`,
   },
-  description: 'Premium apartments, villas, and commercial properties for sale and rent in West Amman, Jordan.',
+  description: APP_DESCRIPTION,
   keywords: ['Real Estate Amman', 'Properties Jordan', 'Apartments Amman', 'Villas West Amman'],
 };
 
