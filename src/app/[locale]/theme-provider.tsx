@@ -14,7 +14,7 @@ export const ThemeContext = createContext<ThemeContextValue | null>(null);
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [themeDir, setThemeDir] = useState<'rtl' | 'ltr'>('ltr');
-
+ 
   // themeMode
   useEffect(() => {
     if (localStorage.getItem('theme') === 'dark-mode') {
