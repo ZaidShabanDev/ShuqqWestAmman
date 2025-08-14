@@ -27,6 +27,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
   } = data;
 
   const listingHref = `/properties-list/${listingHandle}`;
+  const tRealEstate = useTranslations('RealEstate');
 
   const renderSliderGallery = () => {
     return (
@@ -42,7 +43,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
   };
 
   const renderTienIch = () => {
-    const t = useTranslations('RealEstate');
     return (
       <div className="inline-grid grid-cols-3 gap-2">
         <div className="flex items-center gap-x-2">
@@ -50,7 +50,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
             <BedSingle01Icon className="h-4 w-4" />
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            {bedrooms} {t('beds')}
+            {bedrooms} {tRealEstate('beds')}
           </span>
         </div>
 
@@ -60,7 +60,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
             <Bathtub01Icon className="h-4 w-4" />
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            {bathrooms} {t('baths')}
+            {bathrooms} {tRealEstate('baths')}
           </span>
         </div>
 
@@ -70,7 +70,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
             <CropIcon className="h-4 w-4" />
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            {acreage} {t('SqFit')}
+            {acreage} {tRealEstate('SqFit')}
           </span>
         </div>
       </div>
@@ -78,7 +78,6 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
   };
 
   const renderContent = () => {
-    const t = useTranslations('RealEstate');
     return (
       <div className="flex grow flex-col items-start p-3 sm:pe-6">
         <div className="w-full space-y-4">

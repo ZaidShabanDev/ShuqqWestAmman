@@ -8,6 +8,6 @@ export const metadata: Metadata = {
   keywords: ['West Amman', 'Real Estate', 'Apartments', 'Villas', 'Properties', 'Amman', 'Jordan', 'ShuqqWestAmman'],
 };
 
-export default function Layout({ children, params }: { children: React.ReactNode; params: any }) {
+export default function Layout({ children }: { children: React.ReactNode; }) {
   return <ApplicationLayout>{children}</ApplicationLayout>;
 }

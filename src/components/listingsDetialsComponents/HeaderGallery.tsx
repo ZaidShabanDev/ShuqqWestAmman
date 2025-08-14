@@ -102,8 +102,8 @@ interface Props {
   images: string[];
 }
 const HeaderGallery = ({ images }: Props) => {
-  let [isOpen, setIsOpen] = useState(false);
-  let [startIndex, setStartIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
 
   const handleOpenDialog = (index = 0) => {
     setStartIndex(index);

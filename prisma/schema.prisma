@@ -16,9 +16,9 @@ model Property {
   date            DateTime
   listingCategory String
   featuredImage   String?
-  galleryImgs     String[] // Array of image URLs
+  galleryImgs     String[]
   address         String
-  price           String // Stored as string to handle currency formatting
+  price           String
   bedrooms        Int
   bathrooms       Int
   acreage         Float

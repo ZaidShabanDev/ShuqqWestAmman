@@ -75,7 +75,7 @@ export default function GallerySlider({
     trackMouse: true,
   })
 
-  let currentImage = images[index]
+  const currentImage = images[index]
 
   return (
     <MotionConfig

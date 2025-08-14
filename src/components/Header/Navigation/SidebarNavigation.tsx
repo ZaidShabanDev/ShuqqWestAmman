@@ -24,6 +24,9 @@ interface Props {
 const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
   const handleClose = useClose();
   const router = useRouter();
+  const tNavigation = useTranslations('Navigation');
+  const tPlaceholder = useTranslations('Placeholder');
+  const t = useTranslations('MobileFooter');
 
   // Prefetch the next step to improve performance
   useEffect(() => {
@@ -76,7 +79,6 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
   };
 
   const _renderItem = (menu: TNavigationItem, index: number) => {
-    const t = useTranslations('Navigation');
     return (
       <Disclosure key={index} as="li" className="text-neutral-900 dark:text-white">
         <DisclosureButton className="flex w-full cursor-pointer rounded-lg px-3 text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
@@ -85,7 +87,7 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
             className={clsx(!menu.children?.length && 'flex-1', 'block py-2.5')}
             onClick={handleClose}
           >
-            {t(menu.name ?? '')}
+            {tNavigation(menu.name ?? '')}
           </Link>
           {menu.children?.length && (
             <div className="flex flex-1 justify-end">
@@ -99,8 +101,6 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
   };
 
   const renderSearchForm = () => {
-    const tPlaceholder = useTranslations('Placeholder');
-
     return (
       <Form className="flex-1 text-neutral-900 dark:text-neutral-200" action={handleSubmitForm}>
         <div className="flex h-full items-center gap-x-2.5 rounded-xl bg-neutral-50 px-3 py-3 dark:bg-white/5">
@@ -121,7 +121,6 @@ const SidebarNavigation: React.FC<Props> = ({ data, languages }) => {
     );
   };
 
-  const t = useTranslations('MobileFooter');
   return (
     <div>
       <span>{t('subtitle')}</span>

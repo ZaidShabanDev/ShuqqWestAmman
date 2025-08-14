@@ -35,7 +35,7 @@ const RealestateSearchFormMobile = () => {
     router.push(url);
   };
 
-  let typeStringConverted = selectedTypes.length ? selectedTypes.join(', ') : t('Add property');
+  const typeStringConverted = selectedTypes.length ? selectedTypes.join(', ') : t('Add property');
   return (
     <Form id="form-hero-search-form-mobile" action={handleFormSubmit} className="flex w-full flex-col gap-y-3">
       {/* LOCATION INPUT */}

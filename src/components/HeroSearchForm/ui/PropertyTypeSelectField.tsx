@@ -69,7 +69,7 @@ export const PropertyTypeSelectField: FC<Props> = ({
   const t = useTranslations('HeroSearchForm');
 
   const [selectedTypes, setSelectedTypes] = useState<string[]>([propertyTypes[0].name]);
-  let typeStringConverted = selectedTypes.join(', ');
+  const typeStringConverted = selectedTypes.join(', ');
   return (
     <Popover className={`group relative z-10 flex ${className}`}>
       {({ open: showPopover }) => (
