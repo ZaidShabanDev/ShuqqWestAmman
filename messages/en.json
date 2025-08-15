@@ -110,5 +110,10 @@
     "Family": "Family",
     "Over": "Over",
     "propertiesObj": "properties"
+  },
+  "admin": {
+    "Email address": "Email address",
+    "Password": "Password",
+    "login": "Login"
   }
 }
