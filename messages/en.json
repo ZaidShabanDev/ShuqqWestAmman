@@ -114,6 +114,7 @@
   "admin": {
     "Email address": "Email address",
     "Password": "Password",
-    "login": "Login"
+    "login": "Login",
+    "Invalid email or password": "Invalid email or password"
   }
 }

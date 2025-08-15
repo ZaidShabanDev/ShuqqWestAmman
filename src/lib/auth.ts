@@ -1,11 +1,13 @@
-import { NextAuthOptions } from 'next-auth'
+import { getServerSession, NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
+import { redirect } from "next/navigation";
+
 const prisma = new PrismaClient()
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -73,3 +75,9 @@ export const authOptions: NextAuthOptions = {
     signIn: '/admin',
   },
 }
+
+export async function loginIsRequiredServer() {
+  const session = await getServerSession(authConfig);
+  if (!session) return redirect("/");
+}
+
