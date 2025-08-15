@@ -22,7 +22,7 @@ const CredentialsFormProps = () => {
       email: formData.get('email'),
       password: formData.get('password'),
       redirect: false,
-    });
+    }); 
 
     if (signInResponse && !signInResponse.error) {
       router.push('/admin/dashboard');
