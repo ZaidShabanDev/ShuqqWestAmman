@@ -1,9 +1,14 @@
+import { getRealEstateListings } from '@/lib/actions/property.actions';
 import { loginIsRequiredServer } from '@/lib/auth';
 import { Button } from '@/shared/Button';
 import Logo from '@/shared/Logo';
+import DashboardTabs from './dashboardTabs';
 
 export default async function Dashboard() {
   await loginIsRequiredServer();
+
+  const properties = await getRealEstateListings();
+
   return (
     <>
       <div className="relative border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900">
@@ -18,6 +23,8 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
+
+      <DashboardTabs properties={properties} />
     </>
   );
 }
