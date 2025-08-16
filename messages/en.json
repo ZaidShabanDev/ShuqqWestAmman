@@ -116,5 +116,23 @@
     "Password": "Password",
     "login": "Login",
     "Invalid email or password": "Invalid email or password"
+  },
+  "table": {
+    "id": "ID",
+    "propertyName": "Property Name",
+    "type": "Type",
+    "location": "Location",
+    "price": "Price",
+    "action": "Action"
+  },
+  "toastMessages": {
+    "Order deleted successfully": "Order deleted successfully"
+  },
+  "dialog": {
+    "deleteConfirmationTitle": "Delete property",
+    "deleteConfirmationTitleSchedule": "Delete Schedule",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleting": "Deleting..."
   }
 }

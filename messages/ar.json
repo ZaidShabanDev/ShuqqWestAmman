@@ -116,5 +116,23 @@
     "Password": "كلمة المرور",
     "login": "تسجيل الدخول",
     "Invalid email or password": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+  },
+  "table": {
+    "id": "المعرف",
+    "propertyName": "اسم العقار",
+    "type": "النوع",
+    "location": "الموقع",
+    "price": "السعر",
+    "action": "الإجراء"
+  },
+  "toastMessages": {
+    "Order deleted successfully": "تم حذف الطلب بنجاح"
+  },
+  "dialog": {
+    "deleteConfirmationTitle": "حذف العنصر",
+    "deleteConfirmationTitleSchedule": "حذف الجدول الزمني",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "deleting": "جاري الحذف..."
   }
 }

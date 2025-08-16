@@ -1,13 +1,17 @@
 'use client';
 
+import DeleteDialog from '@/components/delete-dialog';
+import { deleteProperty } from '@/lib/actions/property.actions';
 import { formatId } from '@/lib/helpers';
 import { ViewIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 
 const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType[] }) => {
   const [activeTab, setActiveTab] = useState('schedules');
+  const t = useTranslations('table');
 
   const schedules = [
     { id: 1, task: 'Team Meeting', date: '2024-08-16', time: '10:00 AM', status: 'Scheduled' },
@@ -117,22 +121,22 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
               <thead className="bg-neutral-100 dark:bg-neutral-800">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    ID
+                    {t('id')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Property Name
+                    {t('propertyName')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Type
+                    {t('type')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Location
+                    {t('location')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Price
+                    {t('price')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Action
+                    {t('action')}
                   </th>
                 </tr>
               </thead>
@@ -154,10 +158,12 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
                     <td className="px-6 py-4 text-sm font-semibold whitespace-nowrap text-green-600 dark:text-green-400">
                       {property.price}
                     </td>
-                    <td className="px-6 py-4 text-sm font-semibold whitespace-nowrap">
+                    <td className="flex justify-between px-6 py-4 text-sm font-semibold whitespace-nowrap">
                       <Link href={`/properties-list/${property.handle}`}>
                         <HugeiconsIcon icon={ViewIcon} size={20} color="currentColor" strokeWidth={1.5} />
                       </Link>
+
+                      <DeleteDialog id={property.id} action={deleteProperty} actionName={'property'} />
                     </td>
                   </tr>
                 ))}
