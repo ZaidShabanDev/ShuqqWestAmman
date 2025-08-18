@@ -2,12 +2,14 @@ import { getRealEstateListings } from '@/lib/actions/property.actions';
 import { loginIsRequiredServer } from '@/lib/auth';
 import { Button } from '@/shared/Button';
 import Logo from '@/shared/Logo';
+import { getTranslations } from 'next-intl/server';
 import DashboardTabs from './dashboardTabs';
 
 export default async function Dashboard() {
   await loginIsRequiredServer();
 
   const properties = await getRealEstateListings();
+  const t = await getTranslations('Navigation');
 
   return (
     <>
@@ -18,7 +20,7 @@ export default async function Dashboard() {
           </div>
           <div className="flex flex-1 items-center justify-end">
             <Button className="-mx-1 py-1.75!" color="light" href={'/add-listing/1'}>
-              List your property
+              {t('List your property')}
             </Button>
           </div>
         </div>
