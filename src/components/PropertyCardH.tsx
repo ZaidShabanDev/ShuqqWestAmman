@@ -13,18 +13,7 @@ interface PropertyCardHProps {
 }
 
 const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
-  const {
-    galleryImgs,
-    title,
-    handle: listingHandle,
-    price,
-    acreage,
-    bathrooms,
-    bedrooms,
-    address,
-    date,
-    listingCategory,
-  } = data;
+  const { galleryImgs, title, handle: listingHandle, price, bathrooms, area, areaUnit, bedrooms, address } = data;
 
   const listingHref = `/properties-list/${listingHandle}`;
   const tRealEstate = useTranslations('RealEstate');
@@ -70,7 +59,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({ className = '', data }) => {
             <CropIcon className="h-4 w-4" />
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            {acreage} {tRealEstate('SqFit')}
+            {area} {areaUnit}
           </span>
         </div>
       </div>
