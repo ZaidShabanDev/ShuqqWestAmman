@@ -1,53 +1,66 @@
 'use client';
 
-import {
-  Amenity,
-  FormErrors,
-  GovernorateType,
-  PropertyFormData,
-  PropertyFormSchema,
-  PropertyType,
-} from '@/lib/validators';
+import { createProduct } from '@/lib/actions/property.actions';
+import { Amenity, GovernorateType, PropertyFormData, PropertyFormSchema, PropertyType } from '@/lib/validators';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, JSX, useState } from 'react';
-import z from 'zod';
+import { JSX, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 export default function CreatePropertyForm(): JSX.Element {
   const router = useRouter();
   const t = useTranslations('propertiesListings');
-  const [formData, setFormData] = useState<PropertyFormData>({
-    // Basic Information
-    title: '',
-    description: '',
-    propertyType: 'House',
-    governorateType: 'Amman',
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    // Location
-    address: '',
-    city: '',
-    state: '',
-    country: '',
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<PropertyFormData>({
+    resolver: zodResolver(PropertyFormSchema),
+    defaultValues: {
+      // Basic Information
+      title: '',
+      handle: '',
+      description: '',
+      propertyType: 'House',
+      governorateType: 'Amman',
 
-    // Property Details
-    bedrooms: '',
-    bathrooms: '',
-    area: '',
-    areaUnit: 'sqft',
-    yearBuilt: '',
+      // Location
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      buildingNumber: '',
+      floorApartment: '',
+      governorate: '',
+      landmark: '',
+      postalCode: '',
 
-    // Pricing
-    price: '',
+      // Property Details
+      bedrooms: 0,
+      bathrooms: 0,
+      area: '',
+      areaUnit: 'sqft',
+      yearBuilt: '',
 
-    // Amenities
-    amenities: [],
+      // Pricing
+      price: '',
 
-    // Images
-    images: [],
+      // Amenities
+      amenities: [],
+
+      // Images
+      images: [],
+    },
   });
 
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [errors, setErrors] = useState<FormErrors>({});
+  const watchedAmenities = watch('amenities');
 
   const propertyTypes: PropertyType[] = [
     'House',
@@ -86,121 +99,61 @@ export default function CreatePropertyForm(): JSX.Element {
     'Elevator',
   ];
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
-    const { name, value, type } = e.target;
-
-    if (type === 'radio') {
-      const target = e.target as HTMLInputElement;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: target.value as 'rent' | 'sale',
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: '',
-      }));
-    }
-  };
-
   const handleAmenityChange = (amenity: Amenity): void => {
-    setFormData((prev) => ({
-      ...prev,
-      amenities: prev.amenities.includes(amenity)
-        ? prev.amenities.filter((a) => a !== amenity)
-        : [...prev.amenities, amenity],
-    }));
+    const currentAmenities = watchedAmenities || [];
+    const newAmenities = currentAmenities.includes(amenity)
+      ? currentAmenities.filter((a) => a !== amenity)
+      : [...currentAmenities, amenity];
+
+    setValue('amenities', newAmenities);
   };
 
-  const validateForm = (): boolean => {
-    try {
-      // Exclude images from validation as it's handled separately
-      const { images, ...formDataWithoutImages } = formData;
-      PropertyFormSchema.parse(formDataWithoutImages);
-      setErrors({});
-      return true;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: FormErrors = {};
-        error.issues.forEach((err) => {
-          if (err.path.length > 0) {
-            const pathString = String(err.path[0]);
-            newErrors[pathString] = err.message;
-          }
-        });
-        setErrors(newErrors);
-      }
-      return false;
-    }
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      // Scroll to first error
-      const firstErrorField = Object.keys(errors)[0];
-      if (firstErrorField) {
-        const element = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
-        element?.focus();
-        element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      return;
-    }
-
+  const onSubmit: SubmitHandler<PropertyFormData> = async (data) => {
     setIsSubmitting(true);
 
     try {
-      // Create FormData for file upload
-      const submitData = new FormData();
+      // Generate handle from title
+      const handle = data.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9\-]/g, '')
+        .substring(0, 100);
 
-      console.log('Submitting form data:', formData);
+      const submitData = {
+        ...data,
+        handle,
+      };
 
-      //   const response = await fetch('/api/properties', {
-      //     method: 'POST',
-      //     body: submitData,
-      //   });
+      console.log('Submitting form data:', submitData);
 
-      //   const result = await response.json();
+      const result = await createProduct(submitData);
 
-      //   if (response.ok) {
-      //     console.log('Property created:', result);
-      //     // Show success message
-      //     alert('Property listing created successfully!');
-      //     // Redirect to properties page or property detail page
-      //     router.push(`/properties/${result.property?.id || ''}`);
-      //   } else {
-      //     throw new Error(result.message || 'Failed to create property listing');
-      //   }
+      if (!result.success) {
+        console.log('Error creating property:', result.message);
+        toast.error(result.message);
+      } else {
+        toast.success(result.message);
+        router.push('/admin/properties');
+      }
     } catch (error) {
       console.error('Error creating property:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-      alert(`Error creating property listing: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const removeImage = (index: number): void => {
-    setFormData((prev) => ({
-      ...prev,
-      images: prev.images.filter((_, i) => i !== index),
-    }));
+    const currentImages = watch('images') || [];
+    const newImages = currentImages.filter((_, i) => i !== index);
+    setValue('images', newImages);
   };
 
   return (
     <div className="mx-auto max-w-4xl p-6">
       <h1 className="mb-8 text-3xl font-bold">{t('title')}</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Basic Information */}
         <div className="rounded-lg bg-white p-6 text-neutral-900 shadow-md dark:bg-neutral-900 dark:text-neutral-100">
           <h2 className="mb-4 text-xl font-semibold">{t('basicInfoTitle')}</h2>
@@ -210,23 +163,19 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('propertyTitle')} *</label>
               <input
                 type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
+                {...register('title')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.title ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('propertyTitlePlaceholder')}
               />
-              {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
+              {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>}
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium">{t('propertyType')} *</label>
               <select
-                name="propertyType"
-                value={formData.propertyType}
-                onChange={handleInputChange}
+                {...register('propertyType')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.propertyType ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
@@ -237,23 +186,21 @@ export default function CreatePropertyForm(): JSX.Element {
                   </option>
                 ))}
               </select>
-              {errors.propertyType && <p className="mt-1 text-sm text-red-500">{errors.propertyType}</p>}
+              {errors.propertyType && <p className="mt-1 text-sm text-red-500">{errors.propertyType.message}</p>}
             </div>
           </div>
 
           <div className="mt-4">
             <label className="mb-2 block text-sm font-medium">{t('description')} *</label>
             <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
+              {...register('description')}
               rows={4}
               className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                 errors.description ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
               }`}
               placeholder={t('descriptionPlaceholder')}
             />
-            {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
+            {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description.message}</p>}
           </div>
         </div>
 
@@ -267,15 +214,13 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('streetAddress')} *</label>
               <input
                 type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
+                {...register('address')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.address ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('streetAddressPlaceholder')}
               />
-              {errors.address && <p className="mt-1 text-sm text-red-500">{errors.address}</p>}
+              {errors.address && <p className="mt-1 text-sm text-red-500">{errors.address.message}</p>}
             </div>
 
             {/* Building Number */}
@@ -283,15 +228,13 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('buildingNumber')}</label>
               <input
                 type="text"
-                name="buildingNumber"
-                value={formData.buildingNumber}
-                onChange={handleInputChange}
+                {...register('buildingNumber')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.buildingNumber ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder="123"
               />
-              {errors.buildingNumber && <p className="mt-1 text-sm text-red-500">{errors.buildingNumber}</p>}
+              {errors.buildingNumber && <p className="mt-1 text-sm text-red-500">{errors.buildingNumber.message}</p>}
             </div>
 
             {/* Floor/Apartment */}
@@ -299,15 +242,13 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('floorApartment')}</label>
               <input
                 type="text"
-                name="floorApartment"
-                value={formData.floorApartment}
-                onChange={handleInputChange}
+                {...register('floorApartment')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.floorApartment ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('floorApartmentPlaceholder')}
               />
-              {errors.floorApartment && <p className="mt-1 text-sm text-red-500">{errors.floorApartment}</p>}
+              {errors.floorApartment && <p className="mt-1 text-sm text-red-500">{errors.floorApartment.message}</p>}
             </div>
 
             {/* Area/Neighborhood */}
@@ -315,15 +256,13 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('area')}</label>
               <input
                 type="text"
-                name="area"
-                value={formData.area}
-                onChange={handleInputChange}
+                {...register('area')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.area ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('areaPlaceholder')}
               />
-              {errors.area && <p className="mt-1 text-sm text-red-500">{errors.area}</p>}
+              {errors.area && <p className="mt-1 text-sm text-red-500">{errors.area.message}</p>}
             </div>
 
             {/* City */}
@@ -331,24 +270,20 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('city')}</label>
               <input
                 type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
+                {...register('city')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.city ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('cityPlaceholder')}
               />
-              {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city}</p>}
+              {errors.city && <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>}
             </div>
 
             {/* Governorate */}
             <div>
               <label className="mb-2 block text-sm font-medium">{t('governorate')}</label>
               <select
-                name="governorate"
-                value={formData.governorate}
-                onChange={handleInputChange}
+                {...register('governorate')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.governorate ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
@@ -359,7 +294,7 @@ export default function CreatePropertyForm(): JSX.Element {
                   </option>
                 ))}
               </select>
-              {errors.governorate && <p className="mt-1 text-sm text-red-500">{errors.governorate}</p>}
+              {errors.governorate && <p className="mt-1 text-sm text-red-500">{errors.governorate.message}</p>}
             </div>
 
             {/* Postal Code */}
@@ -367,16 +302,14 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('postalCode')}</label>
               <input
                 type="text"
-                name="postalCode"
-                value={formData.postalCode}
-                onChange={handleInputChange}
+                {...register('postalCode')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.postalCode ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder="11111"
                 pattern="[0-9]{5}"
               />
-              {errors.postalCode && <p className="mt-1 text-sm text-red-500">{errors.postalCode}</p>}
+              {errors.postalCode && <p className="mt-1 text-sm text-red-500">{errors.postalCode.message}</p>}
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('postalCodeHint')}</p>
             </div>
 
@@ -385,15 +318,13 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('landmark')}</label>
               <input
                 type="text"
-                name="landmark"
-                value={formData.landmark}
-                onChange={handleInputChange}
+                {...register('landmark')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.landmark ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
                 placeholder={t('landmarkPlaceholder')}
               />
-              {errors.landmark && <p className="mt-1 text-sm text-red-500">{errors.landmark}</p>}
+              {errors.landmark && <p className="mt-1 text-sm text-red-500">{errors.landmark.message}</p>}
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('landmarkHint')}</p>
             </div>
           </div>
@@ -408,25 +339,21 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('bedrooms')}</label>
               <input
                 type="number"
-                name="bedrooms"
-                value={formData.bedrooms}
-                onChange={handleInputChange}
+                {...register('bedrooms', { valueAsNumber: true })}
                 min="0"
                 max="50"
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.bedrooms ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
               />
-              {errors.bedrooms && <p className="mt-1 text-sm text-red-500">{errors.bedrooms}</p>}
+              {errors.bedrooms && <p className="mt-1 text-sm text-red-500">{errors.bedrooms.message}</p>}
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium">{t('bathrooms')}</label>
               <input
                 type="number"
-                name="bathrooms"
-                value={formData.bathrooms}
-                onChange={handleInputChange}
+                {...register('bathrooms', { valueAsNumber: true })}
                 min="0"
                 max="20"
                 step="0.5"
@@ -434,30 +361,25 @@ export default function CreatePropertyForm(): JSX.Element {
                   errors.bathrooms ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
               />
-              {errors.bathrooms && <p className="mt-1 text-sm text-red-500">{errors.bathrooms}</p>}
+              {errors.bathrooms && <p className="mt-1 text-sm text-red-500">{errors.bathrooms.message}</p>}
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium">{t('propertyArea')}</label>
               <input
-                type="number"
-                name="area"
-                value={formData.area}
-                onChange={handleInputChange}
-                min="1"
+                type="text"
+                {...register('area')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.area ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
               />
-              {errors.area && <p className="mt-1 text-sm text-red-500">{errors.area}</p>}
+              {errors.area && <p className="mt-1 text-sm text-red-500">{errors.area.message}</p>}
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium">{t('unit')}</label>
               <select
-                name="areaUnit"
-                value={formData.areaUnit}
-                onChange={handleInputChange}
+                {...register('areaUnit')}
                 className="w-full rounded-lg border border-gray-300 bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
               >
                 <option value="sqft">{t('sqft')}</option>
@@ -469,17 +391,13 @@ export default function CreatePropertyForm(): JSX.Element {
           <div className="mt-4">
             <label className="mb-2 block text-sm font-medium">{t('yearBuilt')}</label>
             <input
-              type="number"
-              name="yearBuilt"
-              value={formData.yearBuilt}
-              onChange={handleInputChange}
-              min="1800"
-              max={new Date().getFullYear()}
+              type="text"
+              {...register('yearBuilt')}
               className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 md:w-1/4 dark:bg-neutral-800 dark:text-neutral-100 ${
                 errors.yearBuilt ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
               }`}
             />
-            {errors.yearBuilt && <p className="mt-1 text-sm text-red-500">{errors.yearBuilt}</p>}
+            {errors.yearBuilt && <p className="mt-1 text-sm text-red-500">{errors.yearBuilt.message}</p>}
           </div>
         </div>
 
@@ -491,17 +409,13 @@ export default function CreatePropertyForm(): JSX.Element {
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium">{t('price')}</label>
               <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleInputChange}
-                min="1"
-                step="0.01"
+                type="text"
+                {...register('price')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.price ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
               />
-              {errors.price && <p className="mt-1 text-sm text-red-500">{errors.price}</p>}
+              {errors.price && <p className="mt-1 text-sm text-red-500">{errors.price.message}</p>}
             </div>
           </div>
         </div>
@@ -515,7 +429,7 @@ export default function CreatePropertyForm(): JSX.Element {
               <label key={amenity} className="flex items-center">
                 <input
                   type="checkbox"
-                  checked={formData.amenities.includes(amenity)}
+                  checked={watchedAmenities?.includes(amenity) || false}
                   onChange={() => handleAmenityChange(amenity)}
                   className="mr-2"
                 />
@@ -531,37 +445,24 @@ export default function CreatePropertyForm(): JSX.Element {
 
           <div>
             <label className="mb-2 block text-sm font-medium">{t('uploadImages')}</label>
-            <input
-              type="file"
-              multiple
-              accept="image/*"
-              className="w-full rounded-lg border border-gray-300 bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
+            <Controller
+              name="images"
+              control={control}
+              render={({ field: { onChange, value, ...field } }) => (
+                <input
+                  {...field}
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files || []);
+                    onChange(files);
+                  }}
+                  className="w-full rounded-lg border border-gray-300 bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
+                />
+              )}
             />
             <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">{t('imageRequirements')}</p>
-
-            {formData.images.length > 0 && (
-              <div className="mt-4">
-                <p className="mb-2 text-sm text-gray-600 dark:text-neutral-300">
-                  {t('imagesSelected', { count: formData.images.length })}
-                </p>
-                <div className="space-y-2">
-                  {formData.images.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between rounded bg-gray-50 p-2 dark:bg-neutral-800"
-                    >
-                      <button
-                        type="button"
-                        onClick={() => removeImage(index)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        {t('removeImage')}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
 

@@ -13,15 +13,26 @@ model Property {
   title           String
   handle          String   @unique
   description     String?
-  date            DateTime
-  listingCategory String
   featuredImage   String?
   galleryImgs     String[]
   address         String
   price           String
   bedrooms        Int
   bathrooms       Int
-  acreage         Float
+  city            String
+  country         String
+  governorate     String
+  governorateType String
+  amenities       String[] // Array to store multiple amenities
+  area            String // Store as string to handle "150" format
+  areaUnit        String // Store unit separately (sqft, sqm, etc.)
+  buildingNumber  String
+  floorApartment  String
+  landmark        String
+  postalCode      String
+  propertyType    String
+  state           String
+  yearBuilt       String // Store as string to handle "2013" format
   createdAt       DateTime @default(now()) @db.Timestamp(6)
   updatedAt       DateTime @updatedAt
 
@@ -29,11 +40,11 @@ model Property {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  password      String?
-  role          String    @default("user")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
