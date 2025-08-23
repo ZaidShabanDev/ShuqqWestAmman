@@ -57,24 +57,24 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
     address,
     bathrooms,
     bedrooms,
-    date,
     description,
     featuredImage,
     galleryImgs,
-
-    listingCategory,
     price,
     title,
-    host,
-    acreage,
+    area,
+    areaUnit,
+    propertyType,
   } = listing;
 
   const renderSectionHeader = () => {
     return (
-      <SectionHeader address={address} listingCategory={listingCategory} title={title}>
+      <SectionHeader address={address} listingCategory={propertyType} title={title}>
         <div className="flex items-center gap-x-3">
           <HugeiconsIcon icon={CropIcon} size={24} strokeWidth={1.5} />
-          <span>{acreage} Sq.Fit</span>
+          <span>
+            {area} {areaUnit}
+          </span>
         </div>
         <div className="flex items-center gap-x-3">
           <Bathtub02Icon className="mb-0.5 size-6" />
@@ -200,11 +200,11 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <div className="flex flex-col gap-y-2.5 text-neutral-700 dark:text-neutral-300">
           <div className="flex items-center gap-x-3">
             <HugeiconsIcon icon={Mail01Icon} size={24} />
-            <span>{host.email}</span>
+            <span>add email here zaid</span>
           </div>
           <div className="flex items-center gap-x-3">
             <HugeiconsIcon icon={SmartPhone01Icon} size={24} />
-            <span>{host.phone}</span>
+            <span>add phone here zaid</span>
           </div>
         </div>
 
