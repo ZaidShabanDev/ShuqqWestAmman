@@ -19,7 +19,7 @@ export default async function Dashboard() {
             <Logo />
           </div>
           <div className="flex flex-1 items-center justify-end">
-            <Button className="-mx-1 py-1.75!" color="light" href={'/add-listing/1'}>
+            <Button className="-mx-1 py-1.75!" color="light" href={'/admin/create'}>
               {t('List your property')}
             </Button>
           </div>
