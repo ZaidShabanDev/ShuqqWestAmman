@@ -150,7 +150,7 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
                       {property.description}
                     </td>
                     <td className="px-6 py-4 text-sm whitespace-nowrap text-neutral-800 dark:text-neutral-200">
-                      {property.listingCategory}
+                      {property.propertyType}
                     </td>
                     <td className="px-6 py-4 text-sm whitespace-nowrap text-neutral-800 dark:text-neutral-200">
                       {property.address}
