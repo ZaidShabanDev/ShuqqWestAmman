@@ -29,8 +29,8 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
           onClick={() => setActiveTab('schedules')}
           className={`px-6 py-3 text-lg font-medium transition-colors duration-200 ${
             activeTab === 'schedules'
-              ? 'border-b-2 border-blue-600 text-blue-600'
-              : 'text-neutral-600 hover:text-blue-500 dark:text-neutral-300'
+              ? 'border-b-2 border-primary-300 text-primary-300'
+              : 'text-neutral-600 hover:text-primary-500 dark:text-neutral-300'
           }`}
         >
           Schedules
@@ -39,8 +39,8 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
           onClick={() => setActiveTab('properties')}
           className={`px-6 py-3 text-lg font-medium transition-colors duration-200 ${
             activeTab === 'properties'
-              ? 'border-b-2 border-blue-600 text-blue-600'
-              : 'text-neutral-600 hover:text-blue-500 dark:text-neutral-300'
+              ? 'border-b-2 border-primary-300 text-primary-300'
+              : 'text-neutral-600 hover:text-primary-500 dark:text-neutral-300'
           }`}
         >
           Properties

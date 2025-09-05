@@ -32,7 +32,7 @@ export const PropertyFormSchema = z.object({
   postalCode: z.string().max(20, 'ZIP code must be less than 20 characters'),
   landmark: z.string().max(100, 'Landmark must be less than 50 characters'),
   country: z.string().max(50, 'Country must be less than 50 characters'),
-
+  neighborhood: z.string().max(50, 'Neighborhood must be less than 50 characters'),
   // Property Details
   bedrooms: z
     .number()
@@ -72,12 +72,12 @@ export const PropertyFormSchema = z.object({
 
   // Amenities
   amenities: z.array(z.string()),
-  images: z.array(z.string().url({ message: 'Each image must be a valid URL' })),
+  galleryImgs: z.array(z.string().url({ message: 'Each image must be a valid URL' })),
 });
 
 // Type inference from Zod schema
 export type PropertyFormData = z.infer<typeof PropertyFormSchema> & {
-  images: string[];
+  galleryImgs: string[];
 };
 
 export interface FormErrors {

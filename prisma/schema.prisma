@@ -28,6 +28,7 @@ model Property {
   areaUnit        String // Store unit separately (sqft, sqm, etc.)
   buildingNumber  String
   floorApartment  String
+  neighborhood    String
   landmark        String
   postalCode      String
   propertyType    String

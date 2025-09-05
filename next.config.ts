@@ -4,8 +4,12 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   images: {
-    minimumCacheTTL: 2678400 * 6, // 3 months
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'utfs.io',
+        port: '',
+      },
       {
         protocol: 'https',
         hostname: 'images.pexels.com',

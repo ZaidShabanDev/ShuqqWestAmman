@@ -1,12 +1,14 @@
 'use client';
 
 import { createProduct } from '@/lib/actions/property.actions';
+import { UploadButton } from '@/lib/uploadthing';
 import { Amenity, GovernorateType, PropertyFormData, PropertyFormSchema, PropertyType } from '@/lib/validators';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { JSX, useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 export default function CreatePropertyForm(): JSX.Element {
@@ -38,6 +40,7 @@ export default function CreatePropertyForm(): JSX.Element {
       country: '',
       buildingNumber: '',
       floorApartment: '',
+      neighborhood: '',
       governorate: '',
       landmark: '',
       postalCode: '',
@@ -56,11 +59,12 @@ export default function CreatePropertyForm(): JSX.Element {
       amenities: [],
 
       // Images
-      images: [],
+      galleryImgs: [],
     },
   });
 
   const watchedAmenities = watch('amenities');
+  const watchedImages = watch('galleryImgs');
 
   const propertyTypes: PropertyType[] = [
     'House',
@@ -124,29 +128,19 @@ export default function CreatePropertyForm(): JSX.Element {
         handle,
       };
 
-      console.log('Submitting form data:', submitData);
-
       const result = await createProduct(submitData);
 
       if (!result.success) {
-        console.log('Error creating property:', result.message);
         toast.error(result.message);
       } else {
         toast.success(result.message);
-        router.push('/admin/properties');
+        router.push('/properties');
       }
     } catch (error) {
       console.error('Error creating property:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const removeImage = (index: number): void => {
-    const currentImages = watch('images') || [];
-    const newImages = currentImages.filter((_, i) => i !== index);
-    setValue('images', newImages);
   };
 
   return (
@@ -256,7 +250,7 @@ export default function CreatePropertyForm(): JSX.Element {
               <label className="mb-2 block text-sm font-medium">{t('area')}</label>
               <input
                 type="text"
-                {...register('area')}
+                {...register('neighborhood')}
                 className={`w-full rounded-lg border bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 ${
                   errors.area ? 'border-red-500' : 'border-gray-300 dark:border-neutral-600'
                 }`}
@@ -443,25 +437,43 @@ export default function CreatePropertyForm(): JSX.Element {
         <div className="rounded-lg bg-white p-6 text-neutral-900 shadow-md dark:bg-neutral-900 dark:text-neutral-100">
           <h2 className="mb-4 text-xl font-semibold">{t('imagesTitle')}</h2>
 
-          <div>
-            <label className="mb-2 block text-sm font-medium">{t('uploadImages')}</label>
-            <Controller
-              name="images"
-              control={control}
-              render={({ field: { onChange, value, ...field } }) => (
-                <input
-                  {...field}
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={(e) => {
-                    const files = Array.from(e.target.files || []);
-                    onChange(files);
-                  }}
-                  className="w-full rounded-lg border border-gray-300 bg-white p-3 text-neutral-900 focus:ring-2 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
-                />
-              )}
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
+              {watchedImages.map((image: string, index: number) => (
+                <div key={index} className="relative">
+                  <Image
+                    src={image}
+                    alt="property image"
+                    className="h-20 w-20 rounded-sm object-cover object-center"
+                    width={80}
+                    height={80}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newImages = watchedImages.filter((_: string, i: number) => i !== index);
+                      setValue('galleryImgs', newImages);
+                    }}
+                    className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white hover:bg-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(res: { url: string }[]) => {
+                const currentImages = watchedImages || [];
+                setValue('galleryImgs', [...currentImages, res[0].url]);
+                toast.success('Image uploaded successfully!');
+              }}
+              onUploadError={(error: Error) => {
+                toast.error(`Upload failed: ${error.message}`);
+              }}
             />
+
             <p className="mt-1 text-sm text-gray-500 dark:text-neutral-400">{t('imageRequirements')}</p>
           </div>
         </div>

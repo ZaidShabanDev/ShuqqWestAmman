@@ -20,6 +20,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@uploadthing/react": "^7.3.3",
     "bcryptjs": "^3.0.2",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
@@ -35,6 +36,7 @@
     "react-swipeable": "^7.0.2",
     "react-toastify": "^11.0.5",
     "react-use": "^17.6.0",
+    "uploadthing": "^7.7.4",
     "zod": "^4.1.0"
   },
   "devDependencies": {
