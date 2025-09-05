@@ -1,31 +1,32 @@
-import {
-  Bathtub02Icon,
-  BodySoapIcon,
-  CableCarIcon,
-  CctvCameraIcon,
-  HairDryerIcon,
-  MeetingRoomIcon,
-  ShampooIcon,
-  Speaker01Icon,
-  TvSmartIcon,
-  VirtualRealityVr01Icon,
-  WaterEnergyIcon,
-  WaterPoloIcon,
-  Wifi01Icon,
-} from '@/components/Icons';
+import { Bathtub02Icon, MeetingRoomIcon } from '@/components/Icons';
 import HeaderGallery from '@/components/listingsDetialsComponents/HeaderGallery';
 import SectionHeader from '@/components/listingsDetialsComponents/SectionHeader';
 import { SectionHeading, SectionSubheading } from '@/components/listingsDetialsComponents/SectionHeading';
 import { getRealEstateListingByHandle } from '@/data/listings';
 import { Button } from '@/shared/Button';
 import ButtonSecondary from '@/shared/ButtonSecondary';
-import { DescriptionDetails, DescriptionList, DescriptionTerm } from '@/shared/description-list';
 import { Divider } from '@/shared/divider';
-import { CropIcon, Flag03Icon, Mail01Icon, Navigation03Icon, SmartPhone01Icon } from '@hugeicons/core-free-icons';
+import {
+  CropIcon,
+  EquipmentGym03Icon,
+  Fan01Icon,
+  FireIcon,
+  Flag03Icon,
+  Mail01Icon,
+  MoreIcon,
+  Navigation03Icon,
+  ParkingAreaCircleIcon,
+  PoolIcon,
+  SecurityIcon,
+  SmartPhone01Icon,
+  SofaIcon,
+  TreeIcon,
+  Wifi01Icon,
+} from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
-import { Fragment } from 'react';
 
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
   const { handle } = await params;
@@ -48,6 +49,8 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
   const { handle } = await params;
 
   const listing = await getRealEstateListingByHandle(handle);
+  const t = await getTranslations('RealEstate');
+  const tListing = await getTranslations('ListingDetails');
 
   if (!listing?.id) {
     return redirect('/real-estate-categories/all');
@@ -65,6 +68,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
     area,
     areaUnit,
     propertyType,
+    amenities,
   } = listing;
 
   const renderSectionHeader = () => {
@@ -78,105 +82,70 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         </div>
         <div className="flex items-center gap-x-3">
           <Bathtub02Icon className="mb-0.5 size-6" />
-          <span>{bathrooms} baths</span>
+          <span>
+            {bathrooms} {t('baths')}
+          </span>
         </div>
         <div className="flex items-center gap-x-3">
           <MeetingRoomIcon className="mb-0.5 size-6" />
-          <span>{bedrooms} bedrooms</span>
+          <span>
+            {bedrooms} {t('beds')}
+          </span>
         </div>
       </SectionHeader>
     );
   };
 
   const renderSectionInfo = () => {
-    const highlights = [
-      {
-        title: 'Near school & amenities',
-        description: 'Near school bus, Southport Hotel, beach, and village; 20-minute drive to Dover.',
-      },
-      {
-        title: 'Spacious and modern',
-        description: 'Spacious 3-bedroom, 2-bathroom home with modern amenities and a large backyard.',
-      },
-      {
-        title: 'Perfect for families',
-        description: 'Ideal for families with children, offering a safe and friendly neighborhood.',
-      },
-      {
-        title: 'Great investment opportunity',
-        description: 'A great investment opportunity with potential for rental income or future resale.',
-      },
-    ];
     return (
       <div className="listingSection__wrap">
-        <SectionHeading>Stay information</SectionHeading>
-        <div className="leading-relaxed text-neutral-700 dark:text-neutral-300">
-          <span>
-            Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides accommodation, an outdoor swimming pool,
-            a bar, a shared lounge, a garden and barbecue facilities. Complimentary WiFi is provided.
-          </span>
-          <br />
-          <br />
-          <span>There is a private bathroom with bidet in all units, along with a hairdryer and free toiletries.</span>
-          <br /> <br />
-          <span>
-            The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental service and a car rental service are
-            available at the accommodation, while cycling can be enjoyed nearby.
-          </span>
+        <SectionHeading>{tListing('listingDescrption')}</SectionHeading>
+        <div className="overflow-hidden leading-relaxed text-neutral-700 dark:text-neutral-300">
+          <span>{description || tListing('noDescriptionAvailable')}</span>
         </div>
-
-        <Divider />
-
-        <SectionHeading>Property highlights </SectionHeading>
-        <DescriptionList>
-          {highlights.map((item, index) => (
-            <Fragment key={index}>
-              <DescriptionTerm>{item.title}</DescriptionTerm>
-              <DescriptionDetails>{item.description}</DescriptionDetails>
-            </Fragment>
-          ))}
-        </DescriptionList>
       </div>
     );
   };
 
   const renderSectionAmenities = () => {
-    const Amenities_demos = [
-      { name: '3 Fast wifi', icon: Wifi01Icon },
-      { name: '4 Bathtub', icon: Bathtub02Icon },
-      { name: '4 Hair dryer', icon: HairDryerIcon },
-      { name: '2 Sound system', icon: Speaker01Icon },
-      { name: '2 Shampoo', icon: ShampooIcon },
-      { name: '2 Body soap', icon: BodySoapIcon },
-      { name: '1 Water Energy ', icon: WaterEnergyIcon },
-      { name: '1 Water Polo', icon: WaterPoloIcon },
-      { name: '2 Cable Car', icon: CableCarIcon },
-      { name: '5 Tv Smart', icon: TvSmartIcon },
-      { name: '5 Cctv Camera', icon: CctvCameraIcon },
-      { name: '4 Virtual Reality Vr', icon: VirtualRealityVr01Icon },
-    ];
+    const amenityIconMap = {
+      Parking: ParkingAreaCircleIcon,
+      Pool: PoolIcon,
+      Gym: EquipmentGym03Icon,
+      Garden: TreeIcon,
+      // Balcony: BalconyIcon,
+      Furnished: SofaIcon,
+      AirConditioning: Fan01Icon,
+      Heating: FireIcon,
+      Wifi: Wifi01Icon,
+      Security: SecurityIcon,
+      // Elevator: ElevatorIcon,
+    };
+
+    const amenitiesWithIcons = amenities
+      .map((amenity) => ({
+        name: amenity,
+        icon: amenityIconMap[amenity as keyof typeof amenityIconMap] || MoreIcon,
+      }))
+      .filter((item) => item.icon);
 
     return (
       <div className="mb-5 listingSection__wrap">
         <div>
-          <SectionHeading>Property features</SectionHeading>
-          <SectionSubheading>About the property&apos;s amenities and services</SectionSubheading>
+          <SectionHeading>{tListing('PropertyFeatures')}</SectionHeading>
+          <SectionSubheading>{tListing('property_amenities_services')}</SectionSubheading>
         </div>
         <Divider className="w-14!" />
 
         <div className="grid grid-cols-1 gap-6 text-sm text-neutral-700 xl:grid-cols-3 dark:text-neutral-300">
-          {Amenities_demos.filter((_, i) => i < 12).map((item) => (
-            <div key={item.name} className="flex items-center gap-x-3">
-              <item.icon className="h-6 w-6" />
-              <span>{item.name}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* ----- */}
-        <div className="w-14 border-b border-neutral-200"></div>
-        <div>
-          <ButtonSecondary>View more 20 features</ButtonSecondary>
+          {amenitiesWithIcons
+            .filter((_, i) => i < 12)
+            .map((item) => (
+              <div key={item.name} className="flex items-center gap-x-3">
+                <HugeiconsIcon icon={item.icon} size={20} color="currentColor" strokeWidth={1.5} />
+                <span>{item.name}</span>
+              </div>
+            ))}
         </div>
       </div>
     );

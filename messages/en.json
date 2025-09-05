@@ -219,5 +219,11 @@
     "amenityFurnished": "Furnished",
     "amenityWifi": "WiFi",
     "amenityLaundry": "Laundry"
+  },
+  "ListingDetails": {
+    "listingDescrption": "Listing Description",
+    "noDescriptionAvailable": "No description available for this property.",
+    "PropertyFeatures": "Property features",
+    "property_amenities_services": "Property Amenities & Services"
   }
 }

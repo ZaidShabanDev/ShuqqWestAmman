@@ -219,5 +219,11 @@
     "amenityFurnished": "مفروش",
     "amenityWifi": "واي فاي",
     "amenityLaundry": "مغسلة"
+  },
+  "ListingDetails": {
+    "listingDescrption": "وصف الإعلان",
+    "noDescriptionAvailable": "لا يوجد وصف متاح لهذا العقار.",
+    "PropertyFeatures": "ميزات العقار",
+    "property_amenities_services": "مرافق وخدمات العقار"
   }
 }
