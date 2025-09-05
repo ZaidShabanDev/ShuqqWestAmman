@@ -12,12 +12,12 @@ const info = [
   {
     title: 'EMAIL',
     icon: Contact01Icon,
-    description: 'example@example.com',
+    description: 'mohammadsamir000d@gmail.com',
   },
   {
     title: 'PHONE',
     icon: TelephoneIcon,
-    description: '000-123-456-7890',
+    description: '+00962792892455',
   },
 ];
 

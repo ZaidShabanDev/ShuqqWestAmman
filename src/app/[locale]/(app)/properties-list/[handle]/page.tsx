@@ -200,11 +200,11 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <div className="flex flex-col gap-y-2.5 text-neutral-700 dark:text-neutral-300">
           <div className="flex items-center gap-x-3">
             <HugeiconsIcon icon={Mail01Icon} size={24} />
-            <span>add email here zaid</span>
+            <span>mohammadsamir000d@gmail.com</span>
           </div>
           <div className="flex items-center gap-x-3">
             <HugeiconsIcon icon={SmartPhone01Icon} size={24} />
-            <span>add phone here zaid</span>
+            <span>+00962792892455</span>
           </div>
         </div>
 
