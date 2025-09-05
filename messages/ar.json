@@ -125,10 +125,16 @@
     "type": "النوع",
     "location": "الموقع",
     "price": "السعر",
-    "action": "الإجراء"
+    "action": "الإجراء",
+    "Schedules": "الجداول الزمنية",
+    "Properties": "العقارات",
+    "task": "المهمة",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "status": "الحالة"
   },
   "toastMessages": {
-    "Order deleted successfully": "تم حذف الطلب بنجاح"
+    "Property deleted successfully": "تم حذف العقار بنجاح"
   },
   "dialog": {
     "deleteConfirmationTitle": "حذف العنصر",

@@ -33,7 +33,7 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
               : 'text-neutral-600 hover:text-primary-500 dark:text-neutral-300'
           }`}
         >
-          Schedules
+          {t('Schedules')}
         </button>
         <button
           onClick={() => setActiveTab('properties')}
@@ -43,7 +43,7 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
               : 'text-neutral-600 hover:text-primary-500 dark:text-neutral-300'
           }`}
         >
-          Properties
+          {t('Properties')}
         </button>
       </div>
 
@@ -51,26 +51,26 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
       {activeTab === 'schedules' && (
         <div className="overflow-hidden rounded-lg border bg-white shadow-md dark:border-neutral-700 dark:bg-neutral-900">
           <div className="border-b bg-neutral-50 px-6 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Schedules</h2>
+            <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">{t('Schedules')}</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-neutral-100 dark:bg-neutral-800">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    ID
+                    {t('id')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Task
+                    {t('task')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Date
+                    {t('date')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Time
+                    {t('time')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-neutral-500 uppercase dark:text-neutral-400">
-                    Status
+                    {t('status')}
                   </th>
                 </tr>
               </thead>
@@ -114,7 +114,7 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
       {activeTab === 'properties' && (
         <div className="overflow-hidden rounded-lg border bg-white shadow-md dark:border-neutral-700 dark:bg-neutral-900">
           <div className="border-b bg-neutral-50 px-6 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Properties</h2>
+            <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">{t('Properties')}</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -147,7 +147,7 @@ const DashboardTabs = ({ properties = [] }: { properties?: RealEstateListingType
                       {formatId(property.id)}
                     </td>
                     <td className="px-6 py-4 text-sm font-medium whitespace-nowrap text-neutral-800 dark:text-neutral-200">
-                      {property.description}
+                      {property.title}
                     </td>
                     <td className="px-6 py-4 text-sm whitespace-nowrap text-neutral-800 dark:text-neutral-200">
                       {property.propertyType}

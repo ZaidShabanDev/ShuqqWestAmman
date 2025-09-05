@@ -125,10 +125,16 @@
     "type": "Type",
     "location": "Location",
     "price": "Price",
-    "action": "Action"
+    "action": "Action",
+    "Schedules": "Schedules",
+    "Properties": "Properties",
+    "task": "Task",
+    "date": "Date",
+    "time": "Time",
+    "status": "Status"
   },
   "toastMessages": {
-    "Order deleted successfully": "Order deleted successfully"
+    "Property deleted successfully": "Property deleted successfully"
   },
   "dialog": {
     "deleteConfirmationTitle": "Delete property",
