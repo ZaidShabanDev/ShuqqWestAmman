@@ -3,8 +3,6 @@ import HeaderGallery from '@/components/listingsDetialsComponents/HeaderGallery'
 import SectionHeader from '@/components/listingsDetialsComponents/SectionHeader';
 import { SectionHeading, SectionSubheading } from '@/components/listingsDetialsComponents/SectionHeading';
 import { getRealEstateListingByHandle } from '@/data/listings';
-import { Button } from '@/shared/Button';
-import ButtonSecondary from '@/shared/ButtonSecondary';
 import { Divider } from '@/shared/divider';
 import {
   CropIcon,
@@ -14,7 +12,6 @@ import {
   Flag03Icon,
   Mail01Icon,
   MoreIcon,
-  Navigation03Icon,
   ParkingAreaCircleIcon,
   PoolIcon,
   SecurityIcon,
@@ -156,10 +153,9 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
       <div className="listingSection__wrap sm:shadow-xl">
         {/* PRICE */}
         <div>
-          <p className="text-base font-normal text-neutral-500 dark:text-neutral-400">Offers over </p>
+          <p className="text-base font-normal text-neutral-500 dark:text-neutral-400">Price </p>
           <div className="mt-1.5 flex items-end text-2xl font-semibold sm:text-3xl">
-            <span className="text-neutral-300 line-through">$350</span>
-            <span className="mx-2">{price}</span>
+            <span className="mx-2">{price} JOD</span>
           </div>
         </div>
 
@@ -177,14 +173,6 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
           </div>
         </div>
 
-        {/* == */}
-        <div className="flex gap-2">
-          <Button href={'/authors/' + handle}>Get in touch</Button>
-          <ButtonSecondary outline>
-            Sent email
-            <HugeiconsIcon icon={Navigation03Icon} size={20} color="currentColor" strokeWidth={1.5} className="mb-px" />
-          </ButtonSecondary>
-        </div>
         <Divider />
 
         <div className="flex items-center gap-x-2 text-sm text-neutral-700 dark:text-neutral-300">
